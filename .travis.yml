@@ -5,3 +5,6 @@ php:
 before_script:
   - phpenv config-rm xdebug.ini || true
   - composer install --no-interaction
+  - touch database/database.sqlite
+  - npm install
+  - npm run prod

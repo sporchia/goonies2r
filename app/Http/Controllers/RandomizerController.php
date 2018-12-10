@@ -36,7 +36,7 @@ class RandomizerController extends Controller
             // @codeCoverageIgnoreEnd
         }
 
-        file_put_contents($tmp_file, $flips->applyBpsToFile(env('ROM_BASE'), public_path('bps/base.bps')));
+        file_put_contents($tmp_file, $flips->applyBpsToFile(env('ROM_BASE'), env('PATCH_BASE', public_path('bps/base.bps'))));
 
         $rom = new Rom($tmp_file);
 

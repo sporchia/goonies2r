@@ -6,6 +6,7 @@
 /public/css/app.*
 /public/mix-manifest.json
 /storage/*.key
+/database/*.sqlite
 /vendor
 /design
 /.idea
