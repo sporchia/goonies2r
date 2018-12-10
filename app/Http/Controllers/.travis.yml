@@ -1,0 +1,7 @@
+language: php
+php:
+  - '7.2'
+
+before_script:
+  - phpenv config-rm xdebug.ini || true
+  - composer install --no-interaction
