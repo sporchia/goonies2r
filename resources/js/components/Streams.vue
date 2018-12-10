@@ -31,8 +31,8 @@ export default {
     clearInterval(this.interval);
   },
   created() {
-    // this.updateStreams();
-    // this.interval = setInterval(this.updateStreams, 300000);
+    this.updateStreams();
+    this.interval = setInterval(this.updateStreams, 300000);
   },
   methods: {
     updateStreams() {

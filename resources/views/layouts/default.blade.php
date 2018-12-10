@@ -26,6 +26,7 @@
                         <a class="dropdown-item{!! (request()->path() == app()->getLocale()  . '/resources') ? ' active' : '' !!}" href="{{ app()->isLocale('en') ? '' : '/' . app()->getLocale() }}/resources">{{ __('navigation.resources') }}</a>
                         <a class="dropdown-item{!! (request()->path() == app()->getLocale()  . '/options') ? ' active' : '' !!}" href="{{ app()->isLocale('en') ? '' : '/' . app()->getLocale() }}/options">{{ __('navigation.options') }}</a>
                         <a class="dropdown-item{!! (request()->path() == app()->getLocale()  . '/updates') ? ' active' : '' !!}" href="{{ app()->isLocale('en') ? '' : '/' . app()->getLocale() }}/updates">{{ __('navigation.updates') }}</a>
+                        <a class="dropdown-item" href="https://github.com/sporchia/goonies2r/issues/new" target="_blank" rel="noopener noreferrer">{{ __('navigation.report_issue') }}</a>
                     </div>
                 </li>
             </ul>
