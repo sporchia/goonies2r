@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/sporchia/goonies2r.svg?branch=master)](https://travis-ci.org/sporchia/goonies2r)
+[![Coverage Status](https://coveralls.io/repos/github/sporchia/goonies2r/badge.svg?branch=master)](https://coveralls.io/github/sporchia/goonies2r?branch=master)
 
 # Goonies 2: Randomizer
 This is a Graph based Randomizer of Goonies 2. Currently it shuffles items and Goonies, more to come.

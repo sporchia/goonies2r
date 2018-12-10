@@ -8,3 +8,10 @@ before_script:
   - touch database/database.sqlite
   - npm install
   - npm run prod
+
+script:
+  - composer test
+  - php artisan code:analyse --level=max
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls -v
