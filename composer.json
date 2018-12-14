@@ -71,7 +71,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "ulimit -n 10000;phpdbg -qrr ./vendor/bin/phpunit --coverage-clover=./tests/_report/coverage.clover --coverage-html=./tests/_report"
+            "ulimit -n 10000;phpdbg -qrr ./vendor/bin/phpunit --coverage-clover=./tests/_report/coverage.clover --coverage-html=./tests/_report --colors=always"
         ]
     }
 }

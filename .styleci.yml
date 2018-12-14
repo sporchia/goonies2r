@@ -1,0 +1,18 @@
+preset: laravel
+
+risky: false
+
+enabled:
+- phpdoc_order
+- phpdoc_separation
+- standardize_increment
+- ternary_to_null_coalescing
+- concat_with_spaces
+- pre_increment
+
+disabled:
+- not_operator_with_successor_space
+- concat_without_spaces
+- post_increment
+- new_with_braces
+- trim_array_spaces
