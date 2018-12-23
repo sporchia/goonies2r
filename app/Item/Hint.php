@@ -5,9 +5,8 @@ namespace App\Item;
 use App\Item;
 
 /**
- * Hint type item
+ * Hint type item.
  */
 class Hint extends Item
 {
-
 }

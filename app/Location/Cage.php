@@ -4,17 +4,17 @@ namespace App\Location;
 
 use App\Item;
 use App\Location;
-use App\Room;
 use App\Rom;
+use App\Room;
 use Fhaculty\Graph\Graph;
 
 /**
- * A Location is any place an Item can be found in game
+ * A Location is any place an Item can be found in game.
  */
 class Cage extends Location
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(Graph $graph, $id, Room $room)
     {
@@ -25,7 +25,7 @@ class Cage extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createEdgeToRoom() : void
     {
@@ -35,7 +35,7 @@ class Cage extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setItem(Item $item = null) : Location
     {
@@ -51,7 +51,7 @@ class Cage extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function writeItem(Rom $rom) : Location
     {

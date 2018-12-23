@@ -19,7 +19,7 @@ return [
                     . '<li>You can pause the game with Select and in the Overworld press UP+A to be warped to the starting area.</li>'
                     . '<li>You only need to punch the old lady once to get her item.</li>'
                 . '</ul>',
-            ]
+            ],
         ],
     ],
 ];

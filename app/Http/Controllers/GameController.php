@@ -3,21 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
-use App\Rom;
-use App\Services\RandomizerService;
-use App\Support\Flips;
-use App\Support\ItemCollection;
-use App\World;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Handle requests for already generated games
+ * Handle requests for already generated games.
  */
 class GameController extends Controller
 {
     /**
-     * return the view to load the already generated game
+     * return the view to load the already generated game.
      *
      * @param \Illuminate\Http\Request $request the request object
      * @param string                  $lang    the requested language
@@ -37,7 +32,7 @@ class GameController extends Controller
     }
 
    /**
-     * return the BPS for an already generated game
+     * return the BPS for an already generated game.
      *
      * @param \Illuminate\Http\Request $request the request object
      *

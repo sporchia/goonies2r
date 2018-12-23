@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * Handle requests for randomization from api
+ * Handle requests for randomization from api.
  */
 class RandomizerController extends Controller
 {
     /**
-     * Generate a randomized game
+     * Generate a randomized game.
      *
      * @param \Illuminate\Http\Request $request the request object
      *
@@ -28,7 +28,7 @@ class RandomizerController extends Controller
     {
         $flips = new Flips;
 
-        $tmp_file = tempnam(sys_get_temp_dir(), "RandomizerController-");
+        $tmp_file = tempnam(sys_get_temp_dir(), 'RandomizerController-');
 
         if ($tmp_file === false) {
             // @codeCoverageIgnoreStart
@@ -59,7 +59,7 @@ class RandomizerController extends Controller
 
         $rand->writeToRom($world, $rom);
 
-        $tmp_file = tempnam(sys_get_temp_dir(), "RandomizerController-Bps-");
+        $tmp_file = tempnam(sys_get_temp_dir(), 'RandomizerController-Bps-');
 
         if ($tmp_file === false) {
             // @codeCoverageIgnoreStart

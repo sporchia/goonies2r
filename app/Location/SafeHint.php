@@ -2,14 +2,14 @@
 
 namespace App\Location;
 
-use App\Location;
 use App\Item;
-use App\Room;
+use App\Location;
 use App\Rom;
+use App\Room;
 use Fhaculty\Graph\Graph;
 
 /**
- * A Location is any place an Item can be found in game
+ * A Location is any place an Item can be found in game.
  */
 class SafeHint extends Location
 {
@@ -17,7 +17,7 @@ class SafeHint extends Location
     protected $hint_offset;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(Graph $graph, $id, Room $room, int $hint_offset = 0x00)
     {
@@ -27,7 +27,7 @@ class SafeHint extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createEdgeToRoom() : void
     {
@@ -37,7 +37,7 @@ class SafeHint extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setItem(Item $item = null) : Location
     {
@@ -53,7 +53,7 @@ class SafeHint extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function writeItem(Rom $rom) : Location
     {

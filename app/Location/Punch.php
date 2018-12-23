@@ -7,12 +7,12 @@ use App\Room;
 use Fhaculty\Graph\Graph;
 
 /**
- * A Location is any place an Item can be found in game
+ * A Location is any place an Item can be found in game.
  */
 class Punch extends Location
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(Graph $graph, $id, Room $room)
     {
@@ -23,7 +23,7 @@ class Punch extends Location
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createEdgeToRoom() : void
     {

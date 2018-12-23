@@ -19,7 +19,7 @@ class Item
     protected static $items;
 
     /**
-     * Get the Item by name
+     * Get the Item by name.
      *
      * @param string $name Name of Item
      *
@@ -38,7 +38,7 @@ class Item
     }
 
     /**
-     * Get the all known Items
+     * Get the all known Items.
      *
      * @return \App\Support\ItemCollection
      */
@@ -105,7 +105,7 @@ class Item
     }
 
     /**
-     * Create a new Item
+     * Create a new Item.
      *
      * @param string $name Unique name of item
      * @param int $byte data to write to Location addresses
@@ -121,7 +121,7 @@ class Item
     }
 
     /**
-     * Get the name of this Item
+     * Get the name of this Item.
      *
      * @return string
      */
@@ -131,7 +131,7 @@ class Item
     }
 
     /**
-     * Get the nice name of this Item
+     * Get the nice name of this Item.
      *
      * @return string
      */
@@ -143,7 +143,7 @@ class Item
     }
 
     /**
-     * Get the item byte to write
+     * Get the item byte to write.
      *
      * @return int
      */
@@ -153,7 +153,7 @@ class Item
     }
 
     /**
-     * Get the item gfx byte to write
+     * Get the item gfx byte to write.
      *
      * @return int
      */
@@ -163,7 +163,7 @@ class Item
     }
 
     /**
-     * serialized version of Item
+     * serialized version of Item.
      *
      * @return string
      */

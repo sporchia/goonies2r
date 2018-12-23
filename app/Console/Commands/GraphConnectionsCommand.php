@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\World;
 use App\Item;
-use App\Support\ItemCollection;
 use App\Services\RandomizerService;
+use App\Support\ItemCollection;
+use App\World;
 use Graphp\GraphViz\GraphViz;
+use Illuminate\Console\Command;
 
 class GraphConnectionsCommand extends Command
 {

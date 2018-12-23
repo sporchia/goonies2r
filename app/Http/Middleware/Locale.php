@@ -20,6 +20,7 @@ class Locale
 
         if (!in_array($segment, config('app.locales'))) {
             $segment = config('app.locale');
+
             return redirect("/$segment" . $request->getRequestUri(), 301);
         }
 

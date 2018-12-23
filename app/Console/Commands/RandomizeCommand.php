@@ -2,15 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Services\RandomizerService;
-use App\Support\ItemCollection;
-use App\Support\Flips;
-use App\World;
 use App\Item;
 use App\Rom;
+use App\Services\RandomizerService;
+use App\Support\Flips;
+use App\Support\ItemCollection;
+use App\World;
+use Graphp\GraphViz\GraphViz;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Graphp\GraphViz\GraphViz;
 
 class RandomizeCommand extends Command
 {
@@ -41,15 +41,17 @@ class RandomizeCommand extends Command
     public function handle()
     {
         $inputFile = is_string($this->argument('input_file')) ? $this->argument('input_file') : 'goonies2.nes';
-        $outputDirectory = is_string($this->argument('output_directory')) ? $this->argument('output_directory'): './';
+        $outputDirectory = is_string($this->argument('output_directory')) ? $this->argument('output_directory') : './';
 
-		if (!is_readable($inputFile)) {
+        if (!is_readable($inputFile)) {
             $this->error('Source File not readable');
-            return 100;
-		}
 
-		if (!is_dir($outputDirectory) || !is_writable($outputDirectory)) {
+            return 100;
+        }
+
+        if (!is_dir($outputDirectory) || !is_writable($outputDirectory)) {
             $this->error('Target Directory not writable');
+
             return 101;
         }
 
@@ -65,6 +67,7 @@ class RandomizeCommand extends Command
 
             if (!is_string($tmp_file) || !is_writable($tmp_file)) {
                 $this->error('Cannot apply base patch');
+
                 return 101;
             }
 
@@ -87,6 +90,7 @@ class RandomizeCommand extends Command
 
             if (!is_string($output_file) || !is_writable($output_file)) {
                 $this->error('Cannot write patched rom');
+
                 return 102;
             }
 
@@ -102,6 +106,7 @@ class RandomizeCommand extends Command
 
             if (!is_string($output_file) || !is_writable($output_file)) {
                 $this->error('Cannot write patch file');
+
                 return 103;
             }
 
@@ -109,6 +114,7 @@ class RandomizeCommand extends Command
 
             if (!is_string($tmp_file) || !is_writable($tmp_file)) {
                 $this->error('Cannot write tempory patch file');
+
                 return 104;
             }
 
@@ -129,6 +135,7 @@ class RandomizeCommand extends Command
 
             if (!is_string($spoiler_file) || !is_writable($spoiler_file)) {
                 $this->error('Cannot write spoiler file');
+
                 return 105;
             }
 

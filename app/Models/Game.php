@@ -6,7 +6,7 @@ use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * model of stored game that has been randomized
+ * model of stored game that has been randomized.
  */
 class Game extends Model
 {
@@ -22,7 +22,7 @@ class Game extends Model
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function boot()
     {
@@ -38,7 +38,7 @@ class Game extends Model
     }
 
     /**
-     * mutate Spoiler from json string to array
+     * mutate Spoiler from json string to array.
      *
      * @return array
      */
@@ -48,7 +48,7 @@ class Game extends Model
     }
 
     /**
-     * mutate Spoiler from array to json string
+     * mutate Spoiler from array to json string.
      *
      * @param array $spoiler data being set
      *

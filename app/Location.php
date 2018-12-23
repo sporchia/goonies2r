@@ -6,7 +6,7 @@ use Fhaculty\Graph\Graph;
 use Fhaculty\Graph\Vertex;
 
 /**
- * A Location is any place an Item can be found in game
+ * A Location is any place an Item can be found in game.
  */
 class Location extends Vertex
 {
@@ -20,7 +20,7 @@ class Location extends Vertex
     protected $edge;
 
     /**
-     * Create a new Location
+     * Create a new Location.
      *
      * @param \Fhaculty\Graph\Graph $graph        graph to be added to
      * @param string|int            $id           identifier used to uniquely identify this vertex in the graph
@@ -39,7 +39,7 @@ class Location extends Vertex
     }
 
     /**
-     * Create the edge from this location to it's room
+     * Create the edge from this location to it's room.
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class Location extends Vertex
     }
 
     /**
-     * Does this Location have (a particular) Item assigned
+     * Does this Location have (a particular) Item assigned?
      *
      * @param \App\Item|null $item item to search locations for
      *
@@ -107,7 +107,7 @@ class Location extends Vertex
     }
 
     /**
-     * Get the Item assigned to this Location, null is nothing is assigned
+     * Get the Item assigned to this Location, null is nothing is assigned.
      *
      * @return \App\Item|null
      */
@@ -118,6 +118,7 @@ class Location extends Vertex
 
     /**
      * Write the Item to this Location in ROM. Will set Item if passed in, and only write if there is an Item set.
+     *
      * @TODO: this is side-affecty
      *
      * @param \App\Rom $rom interface we are going to write to
@@ -153,7 +154,7 @@ class Location extends Vertex
     }
 
     /**
-     * Convert this to string representation
+     * Convert this to string representation.
      *
      * @return string
      */

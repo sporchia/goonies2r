@@ -55,7 +55,7 @@ class ItemCollection extends Collection
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function shuffle($seed = null) : self
     {

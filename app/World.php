@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Fhaculty\Graph\Graph;
-use Fhaculty\Graph\Vertex;
 use App\Support\Collection;
 use App\Support\ItemCollection;
 use App\Support\LocationCollection;
+use Fhaculty\Graph\Graph;
+use Fhaculty\Graph\Vertex;
 use Graphp\Algorithms\Search\BreadthFirst;
 
 /**
@@ -272,6 +272,7 @@ class World
      * Get the Graph associated with this world.
      *
      * @param \Fhaculty\Graph\Vertex $start starting vertex
+     *
      * @throws \OutOfBoundsException if the Vertex doesn't exist
      *
      * @return \Fhaculty\Graph\Graph
@@ -358,6 +359,7 @@ class World
      * Get Vertex by name.
      *
      * @param string $name name of vertex
+     *
      * @throws \OutOfBoundsException if the Vertex doesn't exist
      *
      * @return \Fhaculty\Graph\Vertex
@@ -375,6 +377,7 @@ class World
      * Get Location by name.
      *
      * @param string $name name of location
+     *
      * @throws \OutOfBoundsException if the Location doesn't exist
      *
      * @return \App\Location
@@ -555,7 +558,6 @@ class World
         $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 68']);
         $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 75']);
 
-
         $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 7b']);
         $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 2b']);
         $this->vertices['Room 2b']->createEdge($this->vertices['Room 2c']);
@@ -669,7 +671,6 @@ class World
                 $this->vertices['Room 75']->createEdgeTo($this->vertices['Room 76']);
                 $this->vertices['Room 2c']->createEdge($this->vertices['Room 2f']);
                 $this->vertices['Room 4d']->createEdge($this->vertices['Room 4e']);
-
             }
         }
 
@@ -761,6 +762,5 @@ class World
                 $this->vertices['Room 02']->createEdge($this->vertices['Room 6b']);
             }
         }
-
     }
 }

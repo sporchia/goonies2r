@@ -14,6 +14,7 @@ class LocationCollection extends Collection
      * Create a new collection.
      *
      * @param  mixed  $items
+     *
      * @return void
      */
     public function __construct($items = [])
@@ -67,6 +68,7 @@ class LocationCollection extends Collection
                 --$count;
             }
         }
+
         return $count < 1;
     }
 

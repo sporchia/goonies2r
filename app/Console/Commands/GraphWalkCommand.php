@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\World;
 use App\Item;
 use App\Support\ItemCollection;
+use App\World;
 use Graphp\Algorithms\ShortestPath\BreadthFirst;
 use Graphp\GraphViz\GraphViz;
+use Illuminate\Console\Command;
 
 class GraphWalkCommand extends Command
 {
@@ -65,15 +65,16 @@ class GraphWalkCommand extends Command
             $end = $world->getVertex($toVertex);
         } catch (\OutOfBoundsException $e) {
             $this->error(sprintf('Not Reachable: %s', $toVertex));
+
             return 100;
         }
 
         $end->setAttribute('graphviz.fillcolor', 'red');
         $end->setAttribute('graphviz.style', 'filled');
 
-
         if (!$bf->hasVertex($end)) {
             $this->error(sprintf('Not Reachable: %s', $toVertex));
+
             return 101;
         }
 

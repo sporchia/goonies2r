@@ -100,7 +100,6 @@ class ItemTest extends TestCase
         $this->assertEquals('Test Goonie', $item->getNiceName());
     }
 
-
     /**
      * Test toString.
      *

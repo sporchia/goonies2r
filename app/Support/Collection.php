@@ -5,13 +5,12 @@ namespace App\Support;
 use Illuminate\Support\Collection as BaseCollection;
 
 /**
- * Override normal collection to have a better shuffle algorithm
+ * Override normal collection to have a better shuffle algorithm.
  */
 class Collection extends BaseCollection
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function shuffle($seed = null)
     {

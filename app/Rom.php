@@ -67,7 +67,7 @@ class Rom
             copy($source_location, $this->tmp_file);
         }
 
-        $rom = fopen($this->tmp_file, "r+");
+        $rom = fopen($this->tmp_file, 'r+');
         if ($rom === false) {
             // @codeCoverageIgnoreStart
             throw new \Exception('Unable to open tmp file');
@@ -229,7 +229,8 @@ class Rom
 
     /**
      * clear all rooms.
-     * @TODO: this currently skips NPC's
+     *
+     * @todo this currently skips NPC's
      *
      * @return $this
      */

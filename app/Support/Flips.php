@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Support;
+
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
 
@@ -67,7 +68,7 @@ class Flips
             // @codeCoverageIgnoreStart
             Log::debug($proc->getOutput());
             Log::debug($proc->getErrorOutput());
-            throw new \Exception("Unable to generate");
+            throw new \Exception('Unable to generate');
             // @codeCoverageIgnoreEnd
         }
 
@@ -129,7 +130,7 @@ class Flips
             // @codeCoverageIgnoreStart
             Log::debug($proc->getOutput());
             Log::debug($proc->getErrorOutput());
-            throw new \Exception("Unable to generate");
+            throw new \Exception('Unable to generate');
             // @codeCoverageIgnoreEnd
         }
 

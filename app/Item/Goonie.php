@@ -5,9 +5,8 @@ namespace App\Item;
 use App\Item;
 
 /**
- * Goonie type item
+ * Goonie type item.
  */
 class Goonie extends Item
 {
-
 }
