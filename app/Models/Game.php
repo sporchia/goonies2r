@@ -20,7 +20,6 @@ class Game extends Model
         'spoiler' => '[]',
     ];
 
-
     /**
      * {@inheritdoc}
      */

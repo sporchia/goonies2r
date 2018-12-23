@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Location;
 
-use App\Rom;
 use App\Item;
-use App\Room;
-use Tests\TestCase;
-use Fhaculty\Graph\Graph;
 use App\Location\SafeHint;
+use App\Rom;
+use App\Room;
+use Fhaculty\Graph\Graph;
+use Tests\TestCase;
 
 class SafeHintTest extends TestCase
 {

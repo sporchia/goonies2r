@@ -31,7 +31,7 @@ class GameController extends Controller
         return response()->view('from_hash', ['hash' => $hash]);
     }
 
-   /**
+    /**
      * return the BPS for an already generated game.
      *
      * @param \Illuminate\Http\Request $request the request object

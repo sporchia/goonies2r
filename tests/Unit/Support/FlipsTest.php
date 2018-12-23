@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Support;
 
-use Tests\TestCase;
 use App\Support\Flips;
+use Tests\TestCase;
 
 class FlipsTest extends TestCase
 {

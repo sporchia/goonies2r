@@ -3,11 +3,11 @@
 namespace Tests\Unit\Support;
 
 use App\Item;
-use App\Room;
 use App\Location;
-use Tests\TestCase;
-use Fhaculty\Graph\Graph;
+use App\Room;
 use App\Support\LocationCollection;
+use Fhaculty\Graph\Graph;
+use Tests\TestCase;
 
 class LocationCollectionTest extends TestCase
 {

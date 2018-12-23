@@ -35,7 +35,13 @@ class Cage extends Location
     }
 
     /**
-     * {@inheritdoc}
+     * Sets the item for this location.
+     *
+     * @param \App\Item|null $item Item to be placed at this Location
+     *
+     * @throws \Exception if Item is not valid for this Location type
+     *
+     * @return $this
      */
     public function setItem(Item $item = null) : Location
     {
@@ -51,7 +57,15 @@ class Cage extends Location
     }
 
     /**
-     * {@inheritdoc}
+     * Write the Item to this Location in ROM. Will set Item if passed in, and only write if there is an Item set.
+     *
+     * @TODO: this is side-affecty
+     *
+     * @param \App\Rom $rom interface we are going to write to
+     *
+     * @throws \Exception if no item is set for location
+     *
+     * @return $this
      */
     public function writeItem(Rom $rom) : Location
     {

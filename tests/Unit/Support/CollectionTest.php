@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Support;
 
-use Tests\TestCase;
 use App\Support\Collection;
+use Tests\TestCase;
 
 class CollectionTest extends TestCase
 {

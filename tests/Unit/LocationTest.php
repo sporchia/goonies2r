@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Rom;
 use App\Item;
-use App\Room;
 use App\Location;
-use Tests\TestCase;
+use App\Rom;
+use App\Room;
 use Fhaculty\Graph\Graph;
+use Tests\TestCase;
 
 class LocationTest extends TestCase
 {

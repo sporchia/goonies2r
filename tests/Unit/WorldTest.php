@@ -3,11 +3,11 @@
 namespace Tests\Unit;
 
 use App\Item;
-use App\World;
-use Tests\TestCase;
-use Fhaculty\Graph\Graph;
 use App\Support\ItemCollection;
+use App\World;
+use Fhaculty\Graph\Graph;
 use Graphp\Algorithms\ShortestPath\BreadthFirst;
+use Tests\TestCase;
 
 class WorldTest extends TestCase
 {

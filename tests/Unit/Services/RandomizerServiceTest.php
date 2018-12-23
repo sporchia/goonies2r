@@ -3,11 +3,11 @@
 namespace Tests\Unit\Services;
 
 use App\Item;
-use App\World;
 use App\Location;
-use Tests\TestCase;
-use App\Support\ItemCollection;
 use App\Services\RandomizerService;
+use App\Support\ItemCollection;
+use App\World;
+use Tests\TestCase;
 
 class RandomizerServiceTest extends TestCase
 {

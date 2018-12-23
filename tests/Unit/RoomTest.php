@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Room;
-use Tests\TestCase;
 use Fhaculty\Graph\Graph;
+use Tests\TestCase;
 
 class RoomTest extends TestCase
 {

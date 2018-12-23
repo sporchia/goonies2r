@@ -3,10 +3,10 @@
 namespace Tests\Unit\Location;
 
 use App\Item;
-use App\Room;
-use Tests\TestCase;
 use App\Location\Cage;
+use App\Room;
 use Fhaculty\Graph\Graph;
+use Tests\TestCase;
 
 class CageTest extends TestCase
 {
