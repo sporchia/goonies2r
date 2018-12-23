@@ -1,4 +1,5 @@
 <?php
+
 return [
     'header' => 'Resources',
     'cards' => [

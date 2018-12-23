@@ -21,7 +21,7 @@ class SafeItem extends Location
     protected $safe_offset;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __construct(Graph $graph, $id, Room $room, int $safe_offset = 0x00)
     {
@@ -31,7 +31,7 @@ class SafeItem extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function createEdgeToRoom() : void
     {
@@ -41,7 +41,7 @@ class SafeItem extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function writeItem(Rom $rom) : Location
     {

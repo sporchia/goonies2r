@@ -2,10 +2,8 @@
 
 namespace Tests\Unit\Support;
 
-use App\Support\Flips;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Support\Flips;
 
 class FlipsTest extends TestCase
 {
@@ -56,5 +54,4 @@ class FlipsTest extends TestCase
 
         $flips->applyBpsToFile('tests/Unit/samples/thisfilereallydoesntexist', 'tests/Unit/samples/patch.bps');
     }
-
 }

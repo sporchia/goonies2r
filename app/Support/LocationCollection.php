@@ -6,7 +6,7 @@ use App\Item;
 use App\Location;
 
 /**
- * Collection class meant only for Location objects
+ * Collection class meant only for Location objects.
  */
 class LocationCollection extends Collection
 {
@@ -29,7 +29,7 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Get a Collection of Locations that do not have Items assigned
+     * Get a Collection of Locations that do not have Items assigned.
      *
      * @return static
      */
@@ -41,7 +41,7 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Get a Collection of Locations that do have Items assigned
+     * Get a Collection of Locations that do have Items assigned.
      *
      * @return static
      */
@@ -53,7 +53,7 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Deterime if the Locations given has at least a particular amount of a particular Item
+     * Deterime if the Locations given has at least a particular amount of a particular Item.
      *
      * @param \App\Item $item Item to search for
      * @param int $count the required minimum number of Items
@@ -71,7 +71,7 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Get all the Items assigned in this
+     * Get all the Items assigned in this.
      *
      * @return \App\Support\ItemCollection
      */
@@ -85,7 +85,7 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Get a new Collection of Locations that have (a particlar) Item assigned
+     * Get a new Collection of Locations that have (a particlar) Item assigned.
      *
      * @param \App\Item $item Item to search for
      *

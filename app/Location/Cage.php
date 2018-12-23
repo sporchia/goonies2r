@@ -14,7 +14,7 @@ use Fhaculty\Graph\Graph;
 class Cage extends Location
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __construct(Graph $graph, $id, Room $room)
     {
@@ -25,7 +25,7 @@ class Cage extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function createEdgeToRoom() : void
     {
@@ -35,7 +35,7 @@ class Cage extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setItem(Item $item = null) : Location
     {
@@ -51,7 +51,7 @@ class Cage extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function writeItem(Rom $rom) : Location
     {

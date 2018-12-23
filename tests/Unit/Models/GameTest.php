@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Models;
 
-use App\Models\Game;
 use Tests\TestCase;
+use App\Models\Game;
 
 class GameTest extends TestCase
 {

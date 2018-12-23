@@ -2,14 +2,12 @@
 
 namespace Tests\Unit\Services;
 
-use App\Services\RandomizerService;
-use App\World;
 use App\Item;
+use App\World;
 use App\Location;
-use App\Support\ItemCollection;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Support\ItemCollection;
+use App\Services\RandomizerService;
 
 class RandomizerServiceTest extends TestCase
 {

@@ -22,7 +22,7 @@ class Game extends Model
 
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public static function boot()
     {

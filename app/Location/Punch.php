@@ -12,7 +12,7 @@ use Fhaculty\Graph\Graph;
 class Punch extends Location
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __construct(Graph $graph, $id, Room $room)
     {
@@ -23,7 +23,7 @@ class Punch extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function createEdgeToRoom() : void
     {

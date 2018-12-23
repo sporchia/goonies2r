@@ -2,19 +2,17 @@
 
 namespace Tests\Unit\Location;
 
-use App\Item;
-use App\Location\SafeItem;
-use App\Room;
 use App\Rom;
-use Fhaculty\Graph\Graph;
+use App\Item;
+use App\Room;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Fhaculty\Graph\Graph;
+use App\Location\SafeItem;
 
 class SafeItemTest extends TestCase
 {
     /**
-     * Test writing without an item should throw an Exception
+     * Test writing without an item should throw an Exception.
      *
      * @return void
      */

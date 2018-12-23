@@ -2,11 +2,11 @@
 
 namespace App;
 
+use Fhaculty\Graph\Graph;
+use Fhaculty\Graph\Vertex;
 use App\Support\Collection;
 use App\Support\ItemCollection;
 use App\Support\LocationCollection;
-use Fhaculty\Graph\Graph;
-use Fhaculty\Graph\Vertex;
 use Graphp\Algorithms\Search\BreadthFirst;
 
 /**
@@ -22,7 +22,7 @@ class World
     protected $locations;
 
     /**
-     * Create a graph of the current world based on Items Collected
+     * Create a graph of the current world based on Items Collected.
      *
      * @param \App\Support\ItemCollection $items items that player has collected
      *
@@ -259,7 +259,7 @@ class World
     }
 
     /**
-     * Get the Graph associated with this world
+     * Get the Graph associated with this world.
      *
      * @return \Fhaculty\Graph\Graph
      */
@@ -269,7 +269,7 @@ class World
     }
 
     /**
-     * Get the Graph associated with this world
+     * Get the Graph associated with this world.
      *
      * @param \Fhaculty\Graph\Vertex $start starting vertex
      * @throws \OutOfBoundsException if the Vertex doesn't exist
@@ -284,7 +284,7 @@ class World
     }
 
     /**
-     * Get the Item Locations associated with this world
+     * Get the Item Locations associated with this world.
      *
      * @return \App\Support\LocationCollection
      */
@@ -294,7 +294,7 @@ class World
     }
 
     /**
-     * Get the Locations that can be collected
+     * Get the Locations that can be collected.
      *
      * @param \Fhaculty\Graph\Vertex $start starting location to collect from
      *
@@ -304,8 +304,8 @@ class World
     {
         $graph = $this->getReachableGraphFromVertex($start);
         $vertices = array_map(function ($vertex) {
-                return $this->vertices[$vertex->getId()];
-            }, $graph->getVertices()->getVector());
+            return $this->vertices[$vertex->getId()];
+        }, $graph->getVertices()->getVector());
 
         return new LocationCollection(array_filter($vertices, function ($vertex) {
             return $vertex instanceof Location;
@@ -313,7 +313,7 @@ class World
     }
 
     /**
-     * Get the empty Item Locations associated with this world
+     * Get the empty Item Locations associated with this world.
      *
      * @return \App\Support\LocationCollection
      */
@@ -323,7 +323,7 @@ class World
     }
 
     /**
-     * Get the Items that can be collected
+     * Get the Items that can be collected.
      *
      * @param \Fhaculty\Graph\Vertex $start starting location to collect from
      *
@@ -341,7 +341,7 @@ class World
     }
 
     /**
-     * Get the Items in this world
+     * Get the Items in this world.
      *
      * @return \App\Support\ItemCollection
      */
@@ -355,7 +355,7 @@ class World
     }
 
     /**
-     * Get Vertex by name
+     * Get Vertex by name.
      *
      * @param string $name name of vertex
      * @throws \OutOfBoundsException if the Vertex doesn't exist
@@ -372,7 +372,7 @@ class World
     }
 
     /**
-     * Get Location by name
+     * Get Location by name.
      *
      * @param string $name name of location
      * @throws \OutOfBoundsException if the Location doesn't exist
@@ -389,7 +389,7 @@ class World
     }
 
     /**
-     * Get all rooms that can have a Goonie
+     * Get all rooms that can have a Goonie.
      *
      * @return \App\Support\Collection
      */
@@ -409,7 +409,7 @@ class World
     }
 
     /**
-     * Set the items for creating the edges for the world
+     * Set the items for creating the edges for the world.
      *
      * @param \App\Support\ItemCollection $items Items to generate edges for graph with
      *
@@ -427,7 +427,7 @@ class World
     }
 
     /**
-     * These edges should always be set
+     * These edges should always be set.
      *
      * @return void
      */
@@ -610,7 +610,7 @@ class World
     }
 
     /**
-     * Set conditional edges based on Items
+     * Set conditional edges based on Items.
      *
      * @param \App\Support\ItemCollection $items items to determine which edges to enable
      *

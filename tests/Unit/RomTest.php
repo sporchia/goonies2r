@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\Rom;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RomTest extends TestCase
 {

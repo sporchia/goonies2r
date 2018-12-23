@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\Item;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ItemTest extends TestCase
 {
@@ -24,11 +22,12 @@ class ItemTest extends TestCase
     }
 
     /**
-     * Data for Static test
+     * Data for Static test.
      *
      * @return array
      */
-	public function itemPool() {
+    public function itemPool()
+    {
         return [
             ['Nothing',     0x00, 0x00],
             ['DivingSuit',  0x01, 0x9b],
@@ -74,7 +73,7 @@ class ItemTest extends TestCase
     }
 
     /**
-     * Test that static get throws exception when item doesn't exist
+     * Test that static get throws exception when item doesn't exist.
      *
      * @return void
      */
@@ -86,7 +85,7 @@ class ItemTest extends TestCase
     }
 
     /**
-     * Test translation for nice name
+     * Test translation for nice name.
      *
      * @return void
      */
@@ -103,7 +102,7 @@ class ItemTest extends TestCase
 
 
     /**
-     * Test toString
+     * Test toString.
      *
      * @return void
      */

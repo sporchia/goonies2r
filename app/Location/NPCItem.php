@@ -16,7 +16,7 @@ class NPCItem extends Location
     protected $npc_offset;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __construct(Graph $graph, $id, Room $room, int $npc_offset = 0x00)
     {
@@ -29,7 +29,7 @@ class NPCItem extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function createEdgeToRoom() : void
     {
@@ -39,7 +39,7 @@ class NPCItem extends Location
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function writeItem(Rom $rom) : Location
     {

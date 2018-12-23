@@ -5,7 +5,7 @@ namespace App\Support;
 use App\Item;
 
 /**
- * Collection class meant only for Item objects
+ * Collection class meant only for Item objects.
  */
 class ItemCollection extends Collection
 {
@@ -13,6 +13,7 @@ class ItemCollection extends Collection
      * Create a new collection.
      *
      * @param  mixed  $items
+     *
      * @return void
      */
     public function __construct($items = [])
@@ -28,7 +29,7 @@ class ItemCollection extends Collection
     }
 
     /**
-     * Determine if this collection has any keys in it
+     * Determine if this collection has any keys in it.
      *
      * @return bool
      */
@@ -41,7 +42,7 @@ class ItemCollection extends Collection
     }
 
     /**
-     * Determine if this collection has any bombs in it
+     * Determine if this collection has any bombs in it.
      *
      * @return bool
      */
@@ -54,7 +55,7 @@ class ItemCollection extends Collection
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function shuffle($seed = null) : self
     {

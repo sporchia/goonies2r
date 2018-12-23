@@ -6,7 +6,7 @@ use Fhaculty\Graph\Graph;
 use Fhaculty\Graph\Vertex;
 
 /**
- * Rooms you can navigate through
+ * Rooms you can navigate through.
  */
 class Room extends Vertex
 {
@@ -18,7 +18,7 @@ class Room extends Vertex
     public $meta;
 
     /**
-     * Create a new Room
+     * Create a new Room.
      *
      * @param \Fhaculty\Graph\Graph $graph       graph to be added to
      * @param string|int            $name        identifier used to uniquely identify this vertex in the graph
@@ -76,7 +76,7 @@ class Room extends Vertex
     }
 
     /**
-     * remodel a Room for a goonie
+     * remodel a Room for a goonie.
      *
      * @param \App\Rom $rom rom to call remodel functons on
      * @param int      $id  offset for the remodel so we don't remodel the same room 2x
@@ -93,7 +93,7 @@ class Room extends Vertex
     }
 
     /**
-     * Get the Room Id
+     * Get the Room Id.
      *
      * @return int
      */

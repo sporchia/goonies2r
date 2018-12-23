@@ -11,7 +11,7 @@ class Collection extends BaseCollection
 {
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function shuffle($seed = null)
     {

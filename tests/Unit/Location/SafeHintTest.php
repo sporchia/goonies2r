@@ -2,19 +2,17 @@
 
 namespace Tests\Unit\Location;
 
-use App\Item;
-use App\Location\SafeHint;
-use App\Room;
 use App\Rom;
-use Fhaculty\Graph\Graph;
+use App\Item;
+use App\Room;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Fhaculty\Graph\Graph;
+use App\Location\SafeHint;
 
 class SafeHintTest extends TestCase
 {
     /**
-     * Test writing without an item should throw an Exception
+     * Test writing without an item should throw an Exception.
      *
      * @return void
      */

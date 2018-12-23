@@ -3,10 +3,8 @@
 namespace Tests\Unit;
 
 use App\Room;
-use Fhaculty\Graph\Graph;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Fhaculty\Graph\Graph;
 
 class RoomTest extends TestCase
 {

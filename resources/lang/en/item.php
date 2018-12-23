@@ -1,6 +1,7 @@
 <?php
+
 return [
-	'Nothing' => 'Nothing',
+    'Nothing' => 'Nothing',
     'DivingSuit' => 'Diving Suit',
     'Transceiver' => 'Transceiver',
     'Glasses' => 'Glasses',

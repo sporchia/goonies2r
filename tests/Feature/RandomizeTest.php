@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Game;
 use Tests\TestCase;
+use App\Models\Game;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RadndomizeTest extends TestCase

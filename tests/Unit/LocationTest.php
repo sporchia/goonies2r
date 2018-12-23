@@ -2,19 +2,17 @@
 
 namespace Tests\Unit;
 
-use App\Item;
-use App\Location;
-use App\Room;
 use App\Rom;
-use Fhaculty\Graph\Graph;
+use App\Item;
+use App\Room;
+use App\Location;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Fhaculty\Graph\Graph;
 
 class LocationTest extends TestCase
 {
     /**
-     * Test setting Item
+     * Test setting Item.
      *
      * @return void
      */
@@ -31,7 +29,7 @@ class LocationTest extends TestCase
     }
 
     /**
-     * Test has Item
+     * Test has Item.
      *
      * @return void
      */
@@ -48,7 +46,7 @@ class LocationTest extends TestCase
     }
 
     /**
-     * Test writing without an item should throw an Exception
+     * Test writing without an item should throw an Exception.
      *
      * @return void
      */
@@ -65,7 +63,7 @@ class LocationTest extends TestCase
     }
 
     /**
-     * Test writing without an item should throw an Exception
+     * Test writing without an item should throw an Exception.
      *
      * @return void
      */
@@ -82,7 +80,7 @@ class LocationTest extends TestCase
     }
 
     /**
-     * Test writing without an item should throw an Exception
+     * Test writing without an item should throw an Exception.
      *
      * @return void
      */
@@ -114,8 +112,8 @@ class LocationTest extends TestCase
         $this->assertEquals([0x00, 0x45, 0x00, 0x34], $rom->read((0x04 * 4) + Rom::ROOM_DATA_OFFSET, 4));
     }
 
-     /**
-     * Test getName
+    /**
+     * Test getName.
      *
      * @return void
      */
@@ -129,7 +127,7 @@ class LocationTest extends TestCase
     }
 
     /**
-     * Test toString
+     * Test toString.
      *
      * @return void
      */

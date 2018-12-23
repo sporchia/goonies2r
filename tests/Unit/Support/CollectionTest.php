@@ -2,10 +2,8 @@
 
 namespace Tests\Unit\Support;
 
-use App\Support\Collection;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Support\Collection;
 
 class CollectionTest extends TestCase
 {

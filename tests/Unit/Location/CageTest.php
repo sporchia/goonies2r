@@ -3,13 +3,10 @@
 namespace Tests\Unit\Location;
 
 use App\Item;
-use App\Location\Cage;
 use App\Room;
-use App\Rom;
-use Fhaculty\Graph\Graph;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Location\Cage;
+use Fhaculty\Graph\Graph;
 
 class CageTest extends TestCase
 {

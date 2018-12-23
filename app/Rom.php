@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Wrapper for ROM file
+ * Wrapper for ROM file.
  */
 class Rom
 {
@@ -41,7 +41,7 @@ class Rom
      ];
 
     /**
-     * Create a new wrapper
+     * Create a new wrapper.
      *
      * @param string $source_location location of source ROM to edit
      *
@@ -77,17 +77,17 @@ class Rom
     }
 
     /**
-	 * Get MD5 of current file.
-	 *
-	 * @return string
-	 */
+     * Get MD5 of current file.
+     *
+     * @return string
+     */
     public function getMD5() : string
     {
-		return hash_file('md5', $this->tmp_file);
+        return hash_file('md5', $this->tmp_file);
     }
 
     /**
-     * Save the changes to this output file
+     * Save the changes to this output file.
      *
      * @param string $output_location location on the filesystem to write the new ROM.
      *
@@ -99,7 +99,7 @@ class Rom
     }
 
     /**
-     * Write packed data at the given offset
+     * Write packed data at the given offset.
      *
      * @param int $offset location in the ROM to begin writing
      * @param string $data data to write to the ROM
@@ -120,7 +120,7 @@ class Rom
     }
 
     /**
-     * Get the array of bytes written in the order they were written to the rom
+     * Get the array of bytes written in the order they were written to the rom.
      *
      * @return array
      */
@@ -130,11 +130,12 @@ class Rom
     }
 
     /**
-     * Read data from the ROM file into an array
+     * Read data from the ROM file into an array.
      *
      * @param int $offset location in the ROM to begin reading
      * @param int $length data to read
      * // TODO: this should probably always be an array, or a new Bytes object
+     *
      * @return array
      */
     public function read(int $offset, int $length = 1) : array
@@ -150,11 +151,12 @@ class Rom
         }
 
         $unpacked = unpack('C*', $data);
+
         return count($unpacked) == 1 ? [$unpacked[1]] : array_values($unpacked);
     }
 
     /**
-     * remodel a Room for a goonie
+     * remodel a Room for a goonie.
      *
      * @param int $old_id   room id to clone
      * @param int $offset   which new offset to use in rom
@@ -190,8 +192,8 @@ class Rom
     }
 
     /**
-     * clear cages from layouts that could have had cages
-     * 
+     * clear cages from layouts that could have had cages.
+     *
      * @return void
      */
     public function remodelOldCageRooms() : void
@@ -209,24 +211,24 @@ class Rom
             $layout_pointer = self::ROOM_LAYOUT_OFFSET + $room_id * 2;
 
             $address = $this->read($layout_pointer, 2);
-    
+
             if (count($address) !== 2) {
                 throw new \Exception('Read from rom did not have full address');
             }
-    
+
             $layout_offset = (int) (($address[1] << 8) + $address[0] - 0x3ff0);
-    
+
             $layout = $this->read($layout_offset, 16);
-        
+
             // remove cage from old room
             array_splice($layout, 5, 2, $this->remodel_blank_data[$palette][0]);
             array_splice($layout, 9, 2, $this->remodel_blank_data[$palette][1]);
-            $this->write($layout_offset, pack('C*', ...$layout));   
-        } 
+            $this->write($layout_offset, pack('C*', ...$layout));
+        }
     }
 
     /**
-     * clear all rooms
+     * clear all rooms.
      * @TODO: this currently skips NPC's
      *
      * @return $this
@@ -234,12 +236,12 @@ class Rom
     public function clearItemsFromRooms() : self
     {
         $this->remodelOldCageRooms();
-        
+
         for ($i = 0; $i < 127; ++$i) {
             $room_offset = $i * 4 + 0x648f;
             $item_byte = array_first($this->read($room_offset + 3));
             if ($item_byte != 0x00 && ($item_byte < 0x80 || $item_byte > 0x8f)) {
-                Log::debug(sprintf("Clearing Room: %02x Byte: %02x", $i, $item_byte));
+                Log::debug(sprintf('Clearing Room: %02x Byte: %02x', $i, $item_byte));
                 $this->write($room_offset + 3, pack('C', 0x00));
                 $this->write($room_offset + 1, pack('C', 0x00));
             }
@@ -249,7 +251,7 @@ class Rom
     }
 
     /**
-     * Object destruction magic method
+     * Object destruction magic method.
      *
      * @return void
      */

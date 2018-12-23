@@ -3,8 +3,6 @@
 namespace Tests\Unit\Console\Commands;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RandomizeommandTest extends TestCase
 {
@@ -24,7 +22,7 @@ class RandomizeommandTest extends TestCase
     {
         $this->artisan('randomize', [
             'input_file' => base_path('tests/Unit/samples/garbage.nes'),
-            'output_directory' => '/thisdirectoryshouldntexist'
+            'output_directory' => '/thisdirectoryshouldntexist',
         ])->assertExitCode(101);
     }
 

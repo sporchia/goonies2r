@@ -3,15 +3,15 @@
 namespace App\Services;
 
 use App\Exceptions\NoLocationsAvailableException;
-use App\Item;
-use App\Location;
 use App\Rom;
-use App\Support\ItemCollection;
+use App\Item;
 use App\World;
+use App\Location;
+use App\Support\ItemCollection;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Service for handling the randomization of a World object
+ * Service for handling the randomization of a World object.
  */
 class RandomizerService
 {
@@ -19,7 +19,7 @@ class RandomizerService
     const VERSION = '1.0.0';
 
     /**
-     * Get a collection of the items deemed as Required for progression in the world
+     * Get a collection of the items deemed as Required for progression in the world.
      *
      * @return \App\Support\ItemCollection
      */
@@ -111,7 +111,7 @@ class RandomizerService
         foreach ($emptyCages as $cage) {
             $goonie = $goonies->pop();
             $cage->setItem($goonie);
-            Log::debug(sprintf("Placing Item: %s in %s : %02x",
+            Log::debug(sprintf('Placing Item: %s in %s : %02x',
                 $goonie->getNiceName(), $cage->getName(), $cage->getRoom()->getRoomId()));
         }
 
@@ -126,7 +126,7 @@ class RandomizerService
         foreach ($emptyHintSafes as $safe) {
             $hint = $hints->pop();
             $safe->setItem($hint);
-            Log::debug(sprintf("Placing Item: %s in %s : %02x",
+            Log::debug(sprintf('Placing Item: %s in %s : %02x',
                 $hint->getNiceName(), $safe->getName(), $safe->getRoom()->getRoomId()));
         }
 
@@ -149,7 +149,7 @@ class RandomizerService
 
             $fillLocation = $emptyLocations->first();
 
-            Log::debug(sprintf("Placing Item: %s in %s : %02x",
+            Log::debug(sprintf('Placing Item: %s in %s : %02x',
                 $item->getNiceName(), $fillLocation->getName(), $fillLocation->getRoom()->getRoomId()));
 
             $fillLocation->setItem($item);
@@ -169,10 +169,10 @@ class RandomizerService
             $location->setItem($item);
         }
 
-        Log::debug(sprintf("Extra Items: %d", count($fill_items)));
+        Log::debug(sprintf('Extra Items: %d', count($fill_items)));
 
         $locations = $world->getEmptyLocations();
-        Log::debug(sprintf("Empty Locations: %d", $locations->count()));
+        Log::debug(sprintf('Empty Locations: %d', $locations->count()));
 
         foreach ($locations as $location) {
             $location->setItem(Item::get('Nothing'));
@@ -181,6 +181,7 @@ class RandomizerService
 
     /**
      * Get a spoiler for this randomization.
+     *
      * @todo implement
      *
      * @return array
@@ -191,7 +192,7 @@ class RandomizerService
     }
 
     /**
-     * Prep and write world to a rom
+     * Prep and write world to a rom.
      *
      * @param \App\World $world World to write
      * @param \App\Rom   $rom   Rom to write to

@@ -5,16 +5,14 @@ namespace Tests\Unit\Support;
 use App\Item;
 use App\Room;
 use App\Location;
-use App\Support\LocationCollection;
-use Fhaculty\Graph\Graph;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Fhaculty\Graph\Graph;
+use App\Support\LocationCollection;
 
 class LocationCollectionTest extends TestCase
 {
     /**
-     * Test creating with non-Item throws exception
+     * Test creating with non-Item throws exception.
      *
      * @return void
      */

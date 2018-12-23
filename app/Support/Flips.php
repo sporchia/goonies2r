@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 class Flips
 {
     /**
-     * Generate a BPS file from source and target files
+     * Generate a BPS file from source and target files.
      *
      * @param string $original location of source file
      * @param string $modified location of target file
@@ -60,13 +60,13 @@ class Flips
             $proc->disableOutput();
         }
 
-		Log::debug($proc->getCommandLine());
-		$proc->run();
+        Log::debug($proc->getCommandLine());
+        $proc->run();
 
-		if (!$proc->isSuccessful()) {
+        if (!$proc->isSuccessful()) {
             // @codeCoverageIgnoreStart
-			Log::debug($proc->getOutput());
-			Log::debug($proc->getErrorOutput());
+            Log::debug($proc->getOutput());
+            Log::debug($proc->getErrorOutput());
             throw new \Exception("Unable to generate");
             // @codeCoverageIgnoreEnd
         }
@@ -122,13 +122,13 @@ class Flips
             $proc->disableOutput();
         }
 
-		Log::debug($proc->getCommandLine());
-		$proc->run();
+        Log::debug($proc->getCommandLine());
+        $proc->run();
 
-		if (!$proc->isSuccessful()) {
+        if (!$proc->isSuccessful()) {
             // @codeCoverageIgnoreStart
-			Log::debug($proc->getOutput());
-			Log::debug($proc->getErrorOutput());
+            Log::debug($proc->getOutput());
+            Log::debug($proc->getErrorOutput());
             throw new \Exception("Unable to generate");
             // @codeCoverageIgnoreEnd
         }

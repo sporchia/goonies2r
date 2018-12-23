@@ -2,14 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\World;
 use App\Item;
-use App\Support\ItemCollection;
+use App\World;
+use Tests\TestCase;
 use Fhaculty\Graph\Graph;
+use App\Support\ItemCollection;
 use Graphp\Algorithms\ShortestPath\BreadthFirst;
-use Graphp\GraphViz\GraphViz;
 
 class WorldTest extends TestCase
 {
@@ -40,7 +38,7 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test new World makes Graph
+     * Test new World makes Graph.
      *
      * @return void
      */
@@ -52,7 +50,7 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test new World has correct number of locations
+     * Test new World has correct number of locations.
      *
      * @return void
      */
@@ -65,7 +63,7 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test new World has correct number of locations
+     * Test new World has correct number of locations.
      *
      * @return void
      */
@@ -77,7 +75,7 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test new World has correct number of locations
+     * Test new World has correct number of locations.
      *
      * @return void
      */
@@ -89,13 +87,12 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test new World has correct number of reachable vertices
+     * Test new World has correct number of reachable vertices.
      *
      * @return void
      */
     public function testWorldCorrectNumberOfReachableVertices()
     {
-
         $world = new World(new ItemCollection);
 
         $start = $world->getVertex('Start');
@@ -105,13 +102,12 @@ class WorldTest extends TestCase
     }
 
     /**
-     * Test adding Items increase number of reachable vertices
+     * Test adding Items increase number of reachable vertices.
      *
      * @return void
      */
     public function testWorldChangereachableVertices()
     {
-
         $world = new World(new ItemCollection);
 
         $start = $world->getVertex('Start');
@@ -135,5 +131,4 @@ class WorldTest extends TestCase
 
         $start = $world->getLocation('This test location does not exist');
     }
-
 }
