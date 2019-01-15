@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
-        "codedungeon/phpunit-result-printer": "^0.23.4",
+        "codedungeon/phpunit-result-printer": "^0.24.1",
         "filp/whoops": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.13",
         "fzaninotto/faker": "^1.4",

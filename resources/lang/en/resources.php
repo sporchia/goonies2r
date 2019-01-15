@@ -40,6 +40,7 @@ return [
                         '<ul>'
                             . '<li>You can press select to pause the game, and if you are in the Overworld you can press UP+A to get teleported back to the starting location of the game.</li>'
                             . '<li>The old lady you punch for a Candle only requires 1 punch to get her to reveal her item.</li>'
+                            . '<li>Graphics have been updated to help players understand what they can do in rooms.</li>'
                         . '</ul>',
                     ],
                 ],

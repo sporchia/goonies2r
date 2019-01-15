@@ -3,6 +3,15 @@
 return [
     'header' => 'Updates',
     'cards' => [
+        'v2' => [
+            'header' => 'v2',
+            'content' => [
+                '<ul>'
+                    . '<li>Magic Locator Devices should show on map to the proper Goonie.</li>'
+                    . '<li>Graphics have been added to show if you need to Hammer or Glasses in a room.</li>'
+                . '</ul>',
+            ],
+        ],
         'v1' => [
             'header' => 'v1',
             'content' => [

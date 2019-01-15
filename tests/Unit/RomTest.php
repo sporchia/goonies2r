@@ -40,30 +40,6 @@ class RomTest extends TestCase
     /**
      * @return void
      */
-    public function testCloneRoomWithCageWithSmallFile()
-    {
-        $this->expectException(\Exception::class);
-
-        $rom = new Rom(base_path('tests/Unit/samples/bytes.bin'));
-
-        $rom->cloneRoomWithCage(1, 1, 0x0c);
-    }
-
-    /**
-     * @return void
-     */
-    public function testRemodelOldCageWithSmallFile()
-    {
-        $this->expectException(\Exception::class);
-
-        $rom = new Rom(base_path('tests/Unit/samples/bytes.bin'));
-
-        $rom->remodelOldCageRooms();
-    }
-
-    /**
-     * @return void
-     */
     public function testWriteLog()
     {
         $rom = new Rom;

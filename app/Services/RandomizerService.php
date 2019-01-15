@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 class RandomizerService
 {
     /** @var string */
-    const VERSION = '1.0.0';
+    const VERSION = '2.0.0';
 
     /**
      * Get a collection of the items deemed as Required for progression in the world.
@@ -203,8 +203,23 @@ class RandomizerService
     {
         $rom->clearItemsFromRooms();
 
-        $world->getLocations()->each(function ($location) use ($rom) {
+        $world->getLocations()->each(function ($location) use ($rom, $world) {
             $location->writeItem($rom);
+
+            // handle Goonie Locator Devices
+            $item = $location->getItem();
+            if ($item instanceof Item\Goonie && $item->getName() !== 'Annie') {
+                $door = $world->getDoorsToRoom($location->getRoom())->first();
+
+                if ($door) {
+                    $rom->updateMapLocator($door->meta['side'] === 'front', $item->getByte() - 0xe0, $door->meta['map_address']);
+                }
+            }
+        });
+
+        // update room layouts
+        $world->getRooms()->each(function ($room) use ($rom) {
+            $room->writeToRom($rom);
         });
     }
 }

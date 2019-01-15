@@ -34,9 +34,7 @@ class PunchNPC extends Location
     }
 
     /**
-     * Write the Item to this Location in ROM. Will set Item if passed in, and only write if there is an Item set.
-     *
-     * @TODO: this is side-affecty
+     * Write the Item to this Location in ROM.
      *
      * @param \App\Rom $rom interface we are going to write to
      *

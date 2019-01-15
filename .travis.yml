@@ -11,7 +11,7 @@ before_script:
 
 script:
   - composer test
-  - php artisan code:analyse --level=max
+  - php artisan code:analyse
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v

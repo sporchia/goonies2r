@@ -91,7 +91,7 @@ class World
             'Room 16' => new Room($this->graph, 'Connector',         0x16, 0x00, 0x0c, 0x0d),
             'Room 17' => new Room($this->graph, 'Hint 3',            0x17, 0x00, 0x05, 0x0e),
             'Room 18' => new Room($this->graph, 'Connector',         0x18, 0x6a, 0x02, 0x0e),
-            'Room 19' => new Room($this->graph, 'Goonie 2',          0x19, 0x00, 0x04, 0x0d),
+            'Room 19' => new Room($this->graph, 'Goonie 2',          0x19, 0x00, 0x04, 0x0e),
             'Room 1a' => new Room($this->graph, 'Connector',         0x1a, 0x00, 0x06, 0x0e),
             'Room 1b' => new Room($this->graph, 'Connector',         0x1b, 0x00, 0x09, 0x0e),
             'Room 1c' => new Room($this->graph, 'Connector',         0x1c, 0x1e, 0x04, 0x0e),
@@ -202,9 +202,9 @@ class World
             'Item 03' => new Location\Visible($this->graph, 'Item 03', $this->vertices['Room 03']),
             'Item 05' => new Location\Visible($this->graph, 'Item 05', $this->vertices['Room 05']),
             'Item 14' => new Location\Visible($this->graph, 'Item 14', $this->vertices['Room 14']),
-            'Item 1d' => new Location\NPCItem($this->graph,     'Item 1d', $this->vertices['Room 1d'], 0x00),
+            'Item 1d' => new Location\NPCItem($this->graph, 'Item 1d', $this->vertices['Room 1d'], 0x00),
             'Item 2a' => new Location\Visible($this->graph, 'Item 2a', $this->vertices['Room 2a']),
-            'Item 4a' => new Location\NPCItem($this->graph,     'Item 4a', $this->vertices['Room 4a'], 0x01),
+            'Item 4a' => new Location\NPCItem($this->graph, 'Item 4a', $this->vertices['Room 4a'], 0x01),
             'Item 46' => new Location\Visible($this->graph, 'Item 46', $this->vertices['Room 46']),
             'Item 57' => new Location\Visible($this->graph, 'Item 57', $this->vertices['Room 57']),
             'Item 67' => new Location\Visible($this->graph, 'Item 67', $this->vertices['Room 67']),
@@ -248,7 +248,96 @@ class World
             'Annie'    => new Location\Cage($this->graph, 'Annie',    $this->vertices['Room 4f']),
             'Goonie 6' => new Location\Cage($this->graph, 'Goonie 6', $this->vertices['Room 64']),
             'Goonie 5' => new Location\Cage($this->graph, 'Goonie 5', $this->vertices['Room 76']),
+
+            'Door 00' => new Door($this->graph, 0x00, 0x00, 0x00220c, $this->vertices['Room 00']),
+            'Door 01' => new Door($this->graph, 0x01, 0x00, 0x00220d, $this->vertices['Room 01']),
+            'Door 02' => new Door($this->graph, 0x02, 0x00, 0x00222b, $this->vertices['Room 03']),
+            'Door 03' => new Door($this->graph, 0x03, 0x00, 0x00222d, $this->vertices['Room 05']),
+            'Door 04' => new Door($this->graph, 0x04, 0x00, 0x00224d, $this->vertices['Room 06']),
+            'Door 05' => new Door($this->graph, 0x05, 0x00, 0x0121ee, $this->vertices['Room 07']),
+            'Door 06' => new Door($this->graph, 0x06, 0x00, 0x002299, $this->vertices['Room 0a']),
+            'Door 07' => new Door($this->graph, 0x07, 0x00, 0x01224e, $this->vertices['Room 0b']),
+            'Door 08' => new Door($this->graph, 0x08, 0x00, 0x00226e, $this->vertices['Room 0e']),
+            'Door 09' => new Door($this->graph, 0x09, 0x00, 0x00228c, $this->vertices['Room 10']),
+            'Door 0a' => new Door($this->graph, 0x0A, 0x00, 0x0022ad, $this->vertices['Room 11']),
+            'Door 0b' => new Door($this->graph, 0x0B, 0x00, 0x002270, $this->vertices['Room 16']),
+            'Door 0c' => new Door($this->graph, 0x0C, 0x00, 0x002290, $this->vertices['Room 17']),
+            'Door 0d' => new Door($this->graph, 0x0D, 0x00, 0x002291, $this->vertices['Room 1a']),
+            'Door 0e' => new Door($this->graph, 0x0E, 0x00, 0x01226b, $this->vertices['Room 1c']),
+            'Door 0f' => new Door($this->graph, 0x0F, 0x00, 0x00226c, $this->vertices['Room 1e']),
+            'Door 10' => new Door($this->graph, 0x10, 0x00, 0x002259, $this->vertices['Room 22']),
+            'Door 11' => new Door($this->graph, 0x11, 0x00, 0x002279, $this->vertices['Room 26']),
+            'Door 12' => new Door($this->graph, 0x12, 0x00, 0x002297, $this->vertices['Room 28']),
+            'Door 13' => new Door($this->graph, 0x13, 0x00, 0x0022b9, $this->vertices['Room 2b']),
+            'Door 14' => new Door($this->graph, 0x14, 0x00, 0x012253, $this->vertices['Room 31']),
+            'Door 15' => new Door($this->graph, 0x15, 0x00, 0x012256, $this->vertices['Room 37']),
+            'Door 16' => new Door($this->graph, 0x16, 0x04, 0x012270, $this->vertices['Room 78']),
+            'Door 17' => new Door($this->graph, 0x17, 0x00, 0x012277, $this->vertices['Room 3b']),
+            'Door 18' => new Door($this->graph, 0x18, 0x00, 0x012296, $this->vertices['Room 3d']),
+            'Door 19' => new Door($this->graph, 0x19, 0x00, 0x0122b7, $this->vertices['Room 42']),
+            'Door 1a' => new Door($this->graph, 0x1A, 0x00, 0x0022ae, $this->vertices['Room 46']),
+            'Door 1b' => new Door($this->graph, 0x1B, 0x00, 0x0022b2, $this->vertices['Room 48']),
+            'Door 1c' => new Door($this->graph, 0x1C, 0x00, 0x0022cd, $this->vertices['Room 49']),
+            'Door 1d' => new Door($this->graph, 0x1D, 0x00, 0x0122cb, $this->vertices['Room 4b']),
+            'Door 1e' => new Door($this->graph, 0x1E, 0x00, 0x0022f2, $this->vertices['Room 4f']),
+            'Door 1f' => new Door($this->graph, 0x1F, 0x00, 0x0021d7, $this->vertices['Room 51']),
+            'Door 20' => new Door($this->graph, 0x20, 0x00, 0x012234, $this->vertices['Room 54']),
+            'Door 21' => new Door($this->graph, 0x21, 0x00, 0x002217, $this->vertices['Room 57']),
+            'Door 22' => new Door($this->graph, 0x22, 0x00, 0x002238, $this->vertices['Room 58']),
+            'Door 23' => new Door($this->graph, 0x23, 0x00, 0x0021cb, $this->vertices['Room 59']),
+            'Door 24' => new Door($this->graph, 0x24, 0x00, 0x002238, $this->vertices['Room 5b']),
+            'Door 25' => new Door($this->graph, 0x25, 0x00, 0x0021f7, $this->vertices['Room 5d']),
+            'Door 26' => new Door($this->graph, 0x26, 0x02, 0x002252, $this->vertices['Room 79']),
+            'Door 27' => new Door($this->graph, 0x27, 0x00, 0x012239, $this->vertices['Room 62']),
+            'Door 28' => new Door($this->graph, 0x28, 0x00, 0x0122b0, $this->vertices['Room 63']),
+            'Door 29' => new Door($this->graph, 0x29, 0x00, 0x01220f, $this->vertices['Room 65']),
+            'Door 2a' => new Door($this->graph, 0x2A, 0x00, 0x0022f7, $this->vertices['Room 68']),
+            'Door 2b' => new Door($this->graph, 0x2B, 0x00, 0x0021cd, $this->vertices['Room 6a']),
+            'Door 2c' => new Door($this->graph, 0x2C, 0x00, 0x0021ed, $this->vertices['Room 6c']),
+            'Door 2d' => new Door($this->graph, 0x2D, 0x00, 0x0021ee, $this->vertices['Room 6d']),
+            'Door 2e' => new Door($this->graph, 0x2E, 0x00, 0x002212, $this->vertices['Room 6e']),
+            'Door 2f' => new Door($this->graph, 0x2F, 0x00, 0x00224f, $this->vertices['Room 6f']),
+            'Door 30' => new Door($this->graph, 0x30, 0x00, 0x00224f, $this->vertices['Room 71']),
+            'Door 31' => new Door($this->graph, 0x31, 0x00, 0x002318, $this->vertices['Room 75']),
+            'Door 32' => new Door($this->graph, 0x32, 0x00, 0x01224f, $this->vertices['Room 77']),
+            'Door 33' => new Door($this->graph, 0x33, 0x00, 0x01222d, $this->vertices['Room 05']),
+            'Door 34' => new Door($this->graph, 0x34, 0x00, 0x01228e, $this->vertices['Room 06']),
+            'Door 35' => new Door($this->graph, 0x35, 0x00, 0x01226e, $this->vertices['Room 0e']),
+            'Door 36' => new Door($this->graph, 0x36, 0x00, 0x01228c, $this->vertices['Room 10']),
+            'Door 37' => new Door($this->graph, 0x37, 0x00, 0x012270, $this->vertices['Room 16']),
+            'Door 38' => new Door($this->graph, 0x38, 0x00, 0x012291, $this->vertices['Room 1b']),
+            'Door 39' => new Door($this->graph, 0x39, 0x00, 0x012279, $this->vertices['Room 27']),
+            'Door 3a' => new Door($this->graph, 0x3A, 0x00, 0x0122b5, $this->vertices['Room 3a']),
+            'Door 3b' => new Door($this->graph, 0x3B, 0x00, 0x0122ae, $this->vertices['Room 47']),
+            'Door 3c' => new Door($this->graph, 0x3C, 0x00, 0x0122ab, $this->vertices['Room 13']),
+            'Door 3d' => new Door($this->graph, 0x3D, 0x00, 0x0022f2, $this->vertices['Room 77']),
+            'Door 3e' => new Door($this->graph, 0x3E, 0x00, 0x0121f6, $this->vertices['Room 24']),
+            'Door 3f' => new Door($this->graph, 0x3F, 0x00, 0x012217, $this->vertices['Room 57']),
+            'Door 40' => new Door($this->graph, 0x40, 0x00, 0x012238, $this->vertices['Room 58']),
+            'Door 41' => new Door($this->graph, 0x41, 0x00, 0x0122d1, $this->vertices['Room 5f']),
+            'Door 42' => new Door($this->graph, 0x42, 0x00, 0x01220b, $this->vertices['Room 30']),
+            'Door 43' => new Door($this->graph, 0x43, 0x00, 0x0121f4, $this->vertices['Room 68']),
+            'Door 44' => new Door($this->graph, 0x44, 0x00, 0x012210, $this->vertices['Room 6a']),
+            'Door 45' => new Door($this->graph, 0x45, 0x00, 0x012212, $this->vertices['Room 6e']),
+            'Door 46' => new Door($this->graph, 0x46, 0x00, 0x01224f, $this->vertices['Room 70']),
+            'Door 47' => new Door($this->graph, 0x47, 0x02, 0x0122ab, $this->vertices['Room 7a']),
+            'Door 48' => new Door($this->graph, 0x48, 0x00, 0x00231a, $this->vertices['Room 7b']),
+            'Door 49' => new Door($this->graph, 0x49, 0x04, 0x002299, $this->vertices['Room 7c']),
+            'Door 4a' => new Door($this->graph, 0x4A, 0x02, 0x0021d7, $this->vertices['Room 7d']),
+            'Door 4b' => new Door($this->graph, 0x4B, 0x04, 0x012239, $this->vertices['Room 7e']),
         ]);
+
+        $this->vertices['Room 13']->setWater(true);
+        $this->vertices['Room 46']->setWater(true);
+        $this->vertices['Room 47']->setWater(true);
+        $this->vertices['Room 48']->setWater(true);
+        $this->vertices['Room 49']->setWater(true);
+        $this->vertices['Room 4b']->setWater(true);
+        $this->vertices['Room 4f']->setWater(true);
+        $this->vertices['Room 5f']->setWater(true);
+        $this->vertices['Room 63']->setWater(true);
+        $this->vertices['Room 77']->setWater(true);
+        $this->vertices['Room 7a']->setWater(true);
 
         $this->defaultEdges();
         $this->setEdges($items);
@@ -285,6 +374,61 @@ class World
     }
 
     /**
+     * Get the Graph associated with a vertex not including Regions.
+     *
+     * @param \Fhaculty\Graph\Vertex $start starting vertex
+     *
+     * @throws \OutOfBoundsException if the Vertex doesn't exist
+     * @throws \UnderflowException   if the Vertex isn't valid for this
+     *
+     * @return \Fhaculty\Graph\Graph
+     */
+    public function getRoomsGraphFromVertex(Vertex $start) : Graph
+    {
+        $noRegions = $this->graph->getVertices()->getVerticesMatch(function ($vertex) {
+            return !$vertex instanceof Region;
+        });
+
+        $graph = $this->graph->createGraphCloneVertices($noRegions);
+
+        $newStart = $graph->getVertices()->getVertexMatch(function ($vertex) use ($start) {
+            return $vertex->getId() === $start->getId();
+        });
+
+        $alg = new BreadthFirst($newStart);
+
+        return $this->graph->createGraphCloneVertices($alg->getVertices());
+    }
+
+    /**
+     * Get the Doors linking to this Room.
+     *
+     * @param \App\Room $room starting room
+     *
+     * @throws \OutOfBoundsException if the Vertex doesn't exist
+     * @throws \UnderflowException   if the Vertex isn't valid for this
+     *
+     * @return \App\Support\Collection
+     */
+    public function getDoorsToRoom(Room $room) : Collection
+    {
+        $currentItems = $this->getItems();
+        $this->setItems(Item::all());
+
+        $graph = $this->getRoomsGraphFromVertex($room);
+
+        $vertices = array_map(function ($vertex) {
+            return $this->vertices[$vertex->getId()];
+        }, $graph->getVertices()->getVector());
+
+        $this->setItems($currentItems);
+
+        return new Collection(array_filter($vertices, function ($vertex) {
+            return $vertex instanceof Door;
+        }));
+    }
+
+    /**
      * Get the Item Locations associated with this world.
      *
      * @return \App\Support\LocationCollection
@@ -292,6 +436,18 @@ class World
     public function getLocations() : LocationCollection
     {
         return $this->locations;
+    }
+
+    /**
+     * Get all the Rooms in this World.
+     *
+     * @return \App\Support\Collection
+     */
+    public function getRooms() : Collection
+    {
+        return new Collection(array_filter($this->vertices, function ($vertex) {
+            return $vertex instanceof Room;
+        }));
     }
 
     /**
@@ -438,74 +594,75 @@ class World
     {
         $this->vertices['Start']->createEdge($this->vertices['Front - Orange House Left']);
         $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Front - Gray Basement Left']);
-        $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Room 00']);
-        $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Room 01']);
+        $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Door 00']);
+        $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Door 01']);
         $this->vertices['Room 01']->createEdge($this->vertices['Room 02']);
 
-        $this->vertices['Front - Attic']->createEdge($this->vertices['Room 6c']);
-        $this->vertices['Front - Attic']->createEdge($this->vertices['Room 6d']);
-        $this->vertices['Front - Attic']->createEdge($this->vertices['Room 59']);
+        $this->vertices['Front - Attic']->createEdge($this->vertices['Door 2c']);
+        $this->vertices['Front - Attic']->createEdge($this->vertices['Door 2d']);
+        $this->vertices['Front - Attic']->createEdge($this->vertices['Door 23']);
 
-        $this->vertices['Front - Attic']->createEdge($this->vertices['Room 6a']);
+        $this->vertices['Front - Attic']->createEdge($this->vertices['Door 2b']);
 
-        $this->vertices['Back - Gray House Right']->createEdge($this->vertices['Room 6a']);
-        $this->vertices['Back - Gray House Right']->createEdge($this->vertices['Room 65']);
+        $this->vertices['Back - Gray House Right']->createEdge($this->vertices['Door 44']);
+        $this->vertices['Back - Gray House Right']->createEdge($this->vertices['Door 29']);
         $this->vertices['Front - Orange House Right']->createEdge($this->vertices['Front - Gray Basement Right']);
 
         $this->vertices['Room 72']->createEdge($this->vertices['Room 73']);
 
-        $this->vertices['Front - Gray Basement Right']->createEdge($this->vertices['Room 6f']);
+        $this->vertices['Front - Gray Basement Right']->createEdge($this->vertices['Door 2f']);
+        $this->vertices['Front - Gray Basement Right']->createEdge($this->vertices['Door 30']);
 
-        $this->vertices['Back - Gray Basement Right']->createEdge($this->vertices['Room 77']);
+        $this->vertices['Back - Gray Basement Right']->createEdge($this->vertices['Door 3d']);
 
-        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Room 05']);
-        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Room 03']);
+        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Door 03']);
+        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Door 02']);
         $this->vertices['Room 03']->createEdge($this->vertices['Room 04']);
-        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Room 06']); // to red caves
+        $this->vertices['Front - Gray Basement Left']->createEdge($this->vertices['Door 04']);
 
         $this->vertices['Back - Gray Basement Left']->createEdge($this->vertices['Back - Gray House Left']);
-        $this->vertices['Back - Gray Basement Left']->createEdge($this->vertices['Room 05']);
-        $this->vertices['Back - Gray Basement Left']->createEdge($this->vertices['Room 0b']);
+        $this->vertices['Back - Gray Basement Left']->createEdge($this->vertices['Door 33']);
+        $this->vertices['Back - Gray Basement Left']->createEdge($this->vertices['Door 07']);
         $this->vertices['Room 0b']->createEdge($this->vertices['Room 0c']);
         $this->vertices['Room 0b']->createEdge($this->vertices['Room 0d']);
 
-        $this->vertices['Back - Gray House Left']->createEdge($this->vertices['Room 07']);
+        $this->vertices['Back - Gray House Left']->createEdge($this->vertices['Door 05']);
         $this->vertices['Room 07']->createEdge($this->vertices['Room 08']);
         $this->vertices['Room 09']->createEdgeTo($this->vertices['Room 08']);
 
-        $this->vertices['Back - Gray House Left']->createEdge($this->vertices['Room 30']);
+        $this->vertices['Back - Gray House Left']->createEdge($this->vertices['Door 42']);
 
-        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 06']); // to F gray basement
-        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 0e']); // to F orange caves L
+        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 34']);
+        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 35']);
         $this->vertices['Room 0e']->createEdge($this->vertices['Room 0f']);
-        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 78']);
-        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 1a']); // to Ice L
+        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 16']);
+        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 38']);
         $this->vertices['Room 1a']->createEdge($this->vertices['Room 1b']);
-        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 16']); // to bridge
+        $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 37']);
         $this->vertices['Room 19']->createEdgeTo($this->vertices['Room 18']);
 
-        $this->vertices['Front - Orange Caves Left']->createEdge($this->vertices['Room 0e']);
+        $this->vertices['Front - Orange Caves Left']->createEdge($this->vertices['Door 08']);
 
-        $this->vertices['Front - Orange Caves Right']->createEdge($this->vertices['Room 16']); // to red caves
+        $this->vertices['Front - Orange Caves Right']->createEdge($this->vertices['Door 0b']);
         $this->vertices['Front - Orange Caves Right']->createEdge($this->vertices['Front - Bridge']);
 
         $this->vertices['Front - Bridge']->createEdge($this->vertices['Front - Purple Caves']);
 
-        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Room 28']);
-        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Room 0a']);
-        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Room 7c']);
+        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Door 12']);
+        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Door 06']);
+        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Door 49']);
 
-        $this->vertices['Room 22']->createEdgeTo($this->vertices['Front - Purple Caves']);
+        $this->vertices['Door 10']->createEdgeTo($this->vertices['Front - Purple Caves']);
         $this->vertices['Room 22']->createEdge($this->vertices['Room 23']);
         $this->vertices['Room 23']->createEdge($this->vertices['Room 25']);
 
         $this->vertices['Room 24']->createEdgeTo($this->vertices['Room 23']);
-        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Room 26']);
+        $this->vertices['Front - Purple Caves']->createEdge($this->vertices['Door 11']);
 
         $this->vertices['Room 27']->createEdgeTo($this->vertices['Room 26']);
 
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 27']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 31']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 39']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 14']);
         $this->vertices['Room 31']->createEdge($this->vertices['Room 32']);
         $this->vertices['Room 32']->createEdge($this->vertices['Room 33']);
         $this->vertices['Room 31']->createEdge($this->vertices['Room 34']);
@@ -513,36 +670,36 @@ class World
         $this->vertices['Room 32']->createEdge($this->vertices['Room 35']);
 
         $this->vertices['Room 36']->createEdgeTo($this->vertices['Room 35']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 37']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 15']);
         $this->vertices['Room 37']->createEdge($this->vertices['Room 38']);
         // We specifically ignore the Room 38 -> Room 38 connection so we can walk the map.
 
         $this->vertices['Room 39']->createEdgeTo($this->vertices['Room 38']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 3a']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 42']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 3a']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 19']);
         $this->vertices['Room 42']->createEdge($this->vertices['Room 43']);
         $this->vertices['Room 42']->createEdge($this->vertices['Room 45']);
         $this->vertices['Room 43']->createEdge($this->vertices['Room 44']);
         $this->vertices['Room 44']->createEdge($this->vertices['Room 45']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 3d']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 18']);
         $this->vertices['Room 3d']->createEdge($this->vertices['Room 3e']);
         $this->vertices['Room 3d']->createEdge($this->vertices['Room 3f']);
         $this->vertices['Room 3e']->createEdge($this->vertices['Room 40']);
         $this->vertices['Room 3f']->createEdge($this->vertices['Room 40']);
 
         $this->vertices['Room 41']->createEdgeTo($this->vertices['Room 40']);
-        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Room 3b']);
+        $this->vertices['Back - Green Caves']->createEdge($this->vertices['Door 17']);
         $this->vertices['Room 3b']->createEdge($this->vertices['Room 3c']);
 
-        $this->vertices['Room 12']->createEdge($this->vertices['Room 13']); // to water
+        $this->vertices['Room 12']->createEdge($this->vertices['Room 13']);
         $this->vertices['Room 12']->createEdge($this->vertices['Room 14']);
         $this->vertices['Room 14']->createEdge($this->vertices['Room 15']);
 
-        $this->vertices['Front - Ice Caves Right']->createEdge($this->vertices['Room 1b']);
-        $this->vertices['Front - Ice Caves Right']->createEdge($this->vertices['Room 17']);
+        $this->vertices['Front - Ice Caves Right']->createEdge($this->vertices['Door 0d']);
+        $this->vertices['Front - Ice Caves Right']->createEdge($this->vertices['Door 0c']);
         $this->vertices['Room 17']->createEdge($this->vertices['Room 18']);
 
-        $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Room 47']);
+        $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Door 3b']);
         $this->vertices['Room 47']->createEdge($this->vertices['Room 46']);
 
         $this->vertices['Room 4b']->createEdge($this->vertices['Room 4c']);
@@ -550,36 +707,36 @@ class World
 
         $this->vertices['Room 49']->createEdge($this->vertices['Room 4a']);
 
-        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Room 24']);
-        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Room 57']);
-        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Room 68']);
+        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Door 3e']);
+        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Door 3f']);
+        $this->vertices['Back - Orange Cabin']->createEdge($this->vertices['Door 43']);
         $this->vertices['Room 68']->createEdge($this->vertices['Room 69']);
 
-        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 68']);
-        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 75']);
+        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Door 2a']);
+        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Door 31']);
 
-        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 7b']);
-        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Room 2b']);
+        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Door 48']);
+        $this->vertices['Front - Lava Pit']->createEdge($this->vertices['Door 13']);
         $this->vertices['Room 2b']->createEdge($this->vertices['Room 2c']);
         $this->vertices['Room 2c']->createEdge($this->vertices['Room 2d']);
         $this->vertices['Room 2d']->createEdge($this->vertices['Room 2e']);
 
         $this->vertices['Room 2f']->createEdge($this->vertices['Room 30']);
 
-        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Room 57']);
+        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Door 21']);
         $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Front - Green Cabin']);
-        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Room 58']);
-        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Room 5b']);
+        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Door 22']);
+        $this->vertices['Front - Brown Castle']->createEdge($this->vertices['Door 24']);
 
         $this->vertices['Room 5c']->createEdgeTo($this->vertices['Room 5b']);
 
-        $this->vertices['Back - Red Castle']->createEdgeTo($this->vertices['Room 58']);
+        $this->vertices['Back - Red Castle']->createEdgeTo($this->vertices['Door 40']);
 
-        $this->vertices['Back - Red Castle']->createEdge($this->vertices['Room 7e']);
-        $this->vertices['Back - Red Castle']->createEdge($this->vertices['Room 62']);
-        $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Room 5d']);
+        $this->vertices['Back - Red Castle']->createEdge($this->vertices['Door 4b']);
+        $this->vertices['Back - Red Castle']->createEdge($this->vertices['Door 27']);
+        $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Door 25']);
         $this->vertices['Room 5e']->createEdge($this->vertices['Room 5f']);
-        $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Room 51']);
+        $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Door 1f']);
         $this->vertices['Room 51']->createEdge($this->vertices['Room 52']);
         $this->vertices['Room 63']->createEdge($this->vertices['Room 64']);
 
@@ -609,6 +766,83 @@ class World
         $this->vertices['Item 4b']->createEdgeToRoom();
         $this->vertices['Item 4c']->createEdgeToRoom();
         $this->vertices['Item 56']->createEdgeToRoom();
+
+        $this->vertices['Door 00']->createEdgeToRoom();
+        $this->vertices['Door 01']->createEdgeToRoom();
+        $this->vertices['Door 02']->createEdgeToRoom();
+        $this->vertices['Door 03']->createEdgeToRoom();
+        $this->vertices['Door 04']->createEdgeToRoom();
+        $this->vertices['Door 05']->createEdgeToRoom();
+        $this->vertices['Door 06']->createEdgeToRoom();
+        $this->vertices['Door 07']->createEdgeToRoom();
+        $this->vertices['Door 08']->createEdgeToRoom();
+        $this->vertices['Door 09']->createEdgeToRoom();
+        $this->vertices['Door 0a']->createEdgeToRoom();
+        $this->vertices['Door 0b']->createEdgeToRoom();
+        $this->vertices['Door 0c']->createEdgeToRoom();
+        $this->vertices['Door 0d']->createEdgeToRoom();
+        $this->vertices['Door 0e']->createEdgeToRoom();
+        $this->vertices['Door 0f']->createEdgeToRoom();
+        $this->vertices['Door 10']->createEdgeToRoom();
+        $this->vertices['Door 11']->createEdgeToRoom();
+        $this->vertices['Door 12']->createEdgeToRoom();
+        $this->vertices['Door 13']->createEdgeToRoom();
+        $this->vertices['Door 14']->createEdgeToRoom();
+        $this->vertices['Door 15']->createEdgeToRoom();
+        $this->vertices['Door 16']->createEdgeToRoom();
+        $this->vertices['Door 17']->createEdgeToRoom();
+        $this->vertices['Door 18']->createEdgeToRoom();
+        $this->vertices['Door 19']->createEdgeToRoom();
+        $this->vertices['Door 1a']->createEdgeToRoom();
+        $this->vertices['Door 1b']->createEdgeToRoom();
+        $this->vertices['Door 1c']->createEdgeToRoom();
+        $this->vertices['Door 1d']->createEdgeToRoom();
+        $this->vertices['Door 1e']->createEdgeToRoom();
+        $this->vertices['Door 1f']->createEdgeToRoom();
+        $this->vertices['Door 20']->createEdgeToRoom();
+        $this->vertices['Door 21']->createEdgeToRoom();
+        $this->vertices['Door 22']->createEdgeToRoom();
+        $this->vertices['Door 23']->createEdgeToRoom();
+        $this->vertices['Door 24']->createEdgeToRoom();
+        $this->vertices['Door 25']->createEdgeToRoom();
+        $this->vertices['Door 26']->createEdgeToRoom();
+        $this->vertices['Door 27']->createEdgeToRoom();
+        $this->vertices['Door 28']->createEdgeToRoom();
+        $this->vertices['Door 29']->createEdgeToRoom();
+        $this->vertices['Door 2a']->createEdgeToRoom();
+        $this->vertices['Door 2b']->createEdgeToRoom();
+        $this->vertices['Door 2c']->createEdgeToRoom();
+        $this->vertices['Door 2d']->createEdgeToRoom();
+        $this->vertices['Door 2e']->createEdgeToRoom();
+        $this->vertices['Door 2f']->createEdgeToRoom();
+        $this->vertices['Door 30']->createEdgeToRoom();
+        $this->vertices['Door 31']->createEdgeToRoom();
+        $this->vertices['Door 32']->createEdgeToRoom();
+        $this->vertices['Door 33']->createEdgeToRoom();
+        $this->vertices['Door 34']->createEdgeToRoom();
+        $this->vertices['Door 35']->createEdgeToRoom();
+        $this->vertices['Door 36']->createEdgeToRoom();
+        $this->vertices['Door 37']->createEdgeToRoom();
+        $this->vertices['Door 38']->createEdgeToRoom();
+        $this->vertices['Door 39']->createEdgeToRoom();
+        $this->vertices['Door 3a']->createEdgeToRoom();
+        $this->vertices['Door 3b']->createEdgeToRoom();
+        $this->vertices['Door 3c']->createEdgeToRoom();
+        $this->vertices['Door 3d']->createEdgeToRoom();
+        $this->vertices['Door 3e']->createEdgeToRoom();
+        $this->vertices['Door 3f']->createEdgeToRoom();
+        $this->vertices['Door 40']->createEdgeToRoom();
+        $this->vertices['Door 41']->createEdgeToRoom();
+        $this->vertices['Door 42']->createEdgeToRoom();
+        $this->vertices['Door 43']->createEdgeToRoom();
+        $this->vertices['Door 44']->createEdgeToRoom();
+        $this->vertices['Door 45']->createEdgeToRoom();
+        $this->vertices['Door 46']->createEdgeToRoom();
+        $this->vertices['Door 47']->createEdgeToRoom();
+        $this->vertices['Door 48']->createEdgeToRoom();
+        $this->vertices['Door 49']->createEdgeToRoom();
+        $this->vertices['Door 4a']->createEdgeToRoom();
+        $this->vertices['Door 4b']->createEdgeToRoom();
     }
 
     /**
@@ -652,9 +886,9 @@ class World
         }
 
         if ($items->hasBombs()) {
-            $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Room 7d']);
-            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Room 7a']);
-            $this->vertices['Front - Bridge']->createEdge($this->vertices['Room 79']);
+            $this->vertices['Front - Green Cabin']->createEdge($this->vertices['Door 4a']);
+            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Door 47']);
+            $this->vertices['Front - Bridge']->createEdge($this->vertices['Door 26']);
         }
 
         if ($items->has('Hammer')) {
@@ -675,7 +909,7 @@ class World
         }
 
         if ($items->has('Glasses')) {
-            $this->vertices['Room 58']->createEdgeTo($this->vertices['Back - Red Castle']);
+            $this->vertices['Door 40']->createEdgeTo($this->vertices['Back - Red Castle']);
             $this->vertices['Room 5b']->createEdgeTo($this->vertices['Room 5c']);
             $this->vertices['Room 35']->createEdgeTo($this->vertices['Room 36']);
             $this->vertices['Room 23']->createEdgeTo($this->vertices['Room 24']);
@@ -695,40 +929,39 @@ class World
         }
 
         if ($items->has('DivingSuit')) {
-            $this->vertices['Back - Aquarium Right']->createEdge($this->vertices['Room 5f']);
-            $this->vertices['Back - Aquarium Right']->createEdge($this->vertices['Room 63']);
-            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Room 46']);
-            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Room 49']);
-            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Room 48']);
-            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Room 4b']);
-            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Room 13']);
-            $this->vertices['Front - Aquarium Right']->createEdge($this->vertices['Room 77']);
-            $this->vertices['Front - Aquarium Right']->createEdge($this->vertices['Room 4f']);
+            $this->vertices['Back - Aquarium Right']->createEdge($this->vertices['Door 41']);
+            $this->vertices['Back - Aquarium Right']->createEdge($this->vertices['Door 28']);
+            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Door 1a']);
+            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Door 1c']);
+            $this->vertices['Front - Aquarium Left']->createEdge($this->vertices['Door 1b']);
+            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Door 1d']);
+            $this->vertices['Back - Aquarium Left']->createEdge($this->vertices['Door 3c']);
+            $this->vertices['Front - Aquarium Right']->createEdge($this->vertices['Door 32']);
+            $this->vertices['Front - Aquarium Right']->createEdge($this->vertices['Door 1e']);
         }
 
         if ($items->has('JumpShoes')) {
-            $this->vertices['Front - Purple Caves']->createEdgeTo($this->vertices['Room 22']);
+            $this->vertices['Front - Purple Caves']->createEdgeTo($this->vertices['Door 10']);
         }
 
         if ($items->has('Candle')) {
             $this->vertices['Room 6b']->createEdge($this->vertices['Room 6c']);
             $this->vertices['Room 65']->createEdge($this->vertices['Room 66']);
 
-            $this->vertices['Back - Gray House Right']->createEdgeTo($this->vertices['Room 6e']);
+            $this->vertices['Back - Gray House Right']->createEdgeTo($this->vertices['Door 45']);
 
-            $this->vertices['Front - Orange House Right']->createEdge($this->vertices['Room 6e']);
+            $this->vertices['Front - Orange House Right']->createEdge($this->vertices['Door 2e']);
 
-            $this->vertices['Front - Gray Basement Right']->createEdge($this->vertices['Room 71']);
 
             $this->vertices['Room 6f']->createEdge($this->vertices['Room 70']);
 
-            $this->vertices['Back - Gray Basement Right']->createEdgeTo($this->vertices['Room 70']);
+            $this->vertices['Back - Gray Basement Right']->createEdgeTo($this->vertices['Door 46']);
 
-            $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 1c']);
+            $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 0e']);
 
-            $this->vertices['Back - Red Caves']->createEdge($this->vertices['Room 10']); // to Ice L
+            $this->vertices['Back - Red Caves']->createEdge($this->vertices['Door 36']);
 
-            $this->vertices['Front - Orange Caves Left']->createEdge($this->vertices['Room 1e']);
+            $this->vertices['Front - Orange Caves Left']->createEdge($this->vertices['Door 0f']);
             $this->vertices['Room 1e']->createEdge($this->vertices['Room 1f']);
             $this->vertices['Room 1e']->createEdge($this->vertices['Room 20']);
             $this->vertices['Room 1f']->createEdge($this->vertices['Room 21']);
@@ -737,16 +970,16 @@ class World
             $this->vertices['Room 28']->createEdge($this->vertices['Room 29']);
             $this->vertices['Room 29']->createEdge($this->vertices['Room 2a']);
 
-            $this->vertices['Front - Ice Caves Left']->createEdge($this->vertices['Room 10']);
-            $this->vertices['Front - Ice Caves Left']->createEdge($this->vertices['Room 11']);
+            $this->vertices['Front - Ice Caves Left']->createEdge($this->vertices['Door 09']);
+            $this->vertices['Front - Ice Caves Left']->createEdge($this->vertices['Door 0a']);
             $this->vertices['Room 11']->createEdge($this->vertices['Room 12']);
 
-            $this->vertices['Back - Red Castle']->createEdge($this->vertices['Room 54']);
+            $this->vertices['Back - Red Castle']->createEdge($this->vertices['Door 20']);
             $this->vertices['Room 54']->createEdge($this->vertices['Room 55']);
 
             if ($items->has('Hammer')) {
-                $this->vertices['Room 70']->createEdgeTo($this->vertices['Back - Gray Basement Right']);
-                $this->vertices['Room 6e']->createEdgeTo($this->vertices['Back - Gray House Right']);
+                $this->vertices['Door 46']->createEdgeTo($this->vertices['Back - Gray Basement Right']);
+                $this->vertices['Door 45']->createEdgeTo($this->vertices['Back - Gray House Right']);
 
                 if ($items->has('Ladder')) {
                     $this->vertices['Room 71']->createEdgeTo($this->vertices['Room 72']);

@@ -98,7 +98,7 @@ class WorldTest extends TestCase
         $start = $world->getVertex('Start');
         $graph = $world->getReachableGraphFromVertex($start);
 
-        $this->assertEquals(45, $graph->getVertices()->count());
+        $this->assertEquals(67, $graph->getVertices()->count());
     }
 
     /**
@@ -113,11 +113,11 @@ class WorldTest extends TestCase
         $start = $world->getVertex('Start');
         $graph = $world->getReachableGraphFromVertex($start);
 
-        $this->assertEquals(45, $graph->getVertices()->count());
+        $this->assertEquals(67, $graph->getVertices()->count());
 
         $world->setItems(new ItemCollection([Item::get('Hammer')]));
         $graph = $world->getReachableGraphFromVertex($start);
-        $this->assertEquals(72, $graph->getVertices()->count());
+        $this->assertEquals(101, $graph->getVertices()->count());
     }
 
     /**

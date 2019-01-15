@@ -88,7 +88,7 @@ class RandomizeCommand extends Command
             // @codeCoverageIgnoreStart
             $output_file = sprintf('%s/G2-VT_%s.nes', $outputDirectory, $hash);
 
-            if (!is_string($output_file) || !is_writable($output_file)) {
+            if (!is_string($output_file) || !is_writable($outputDirectory)) {
                 $this->error('Cannot write patched rom');
 
                 return 102;
@@ -104,7 +104,7 @@ class RandomizeCommand extends Command
             // @codeCoverageIgnoreStart
             $output_file = sprintf('%s/G2-VT_%s.bps', $outputDirectory, $hash);
 
-            if (!is_string($output_file) || !is_writable($output_file)) {
+            if (!is_string($output_file) || !is_writable($outputDirectory)) {
                 $this->error('Cannot write patch file');
 
                 return 103;
@@ -133,7 +133,7 @@ class RandomizeCommand extends Command
             // @codeCoverageIgnoreStart
             $spoiler_file = sprintf('%s/G2-VT_%s.json', $outputDirectory, $hash);
 
-            if (!is_string($spoiler_file) || !is_writable($spoiler_file)) {
+            if (!is_string($spoiler_file) || !is_writable($outputDirectory)) {
                 $this->error('Cannot write spoiler file');
 
                 return 105;

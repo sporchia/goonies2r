@@ -20,6 +20,8 @@ class Cage extends Location
     {
         parent::__construct($graph, $id, $room);
 
+        $room->setCage(true);
+
         $this->setAttribute('graphviz.fillcolor', 'palegreen');
         $this->setAttribute('graphviz.style', 'filled');
     }
@@ -32,6 +34,24 @@ class Cage extends Location
         parent::createEdgeToRoom();
 
         $this->edge->setAttribute('graphviz.color', 'green');
+    }
+
+    /**
+     * Sets the room for this location.
+     *
+     * @param \App\Room $room Room to be associated
+     *
+     * @return $this
+     */
+    public function setRoom(Room $room) : Location
+    {
+        $this->room->setCage(false);
+
+        $this->room = $room;
+
+        $room->setCage(true);
+
+        return $this;
     }
 
     /**
@@ -57,9 +77,7 @@ class Cage extends Location
     }
 
     /**
-     * Write the Item to this Location in ROM. Will set Item if passed in, and only write if there is an Item set.
-     *
-     * @TODO: this is side-affecty
+     * Write the Item to this Location in ROM.
      *
      * @param \App\Rom $rom interface we are going to write to
      *
@@ -72,8 +90,6 @@ class Cage extends Location
         parent::writeItem($rom);
 
         $write_byte = $this->item === null ? 0x00 : $this->item->getByte() - 0xe0;
-
-        $this->room->remodelForGoonie($rom, $write_byte);
 
         return $this;
     }

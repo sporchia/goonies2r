@@ -5,6 +5,7 @@ import Streams from './components/Streams.vue';
 import Vue from 'vue';
 import VueInternationalization from 'vue-i18n';
 import VueTimeago from 'vue-timeago';
+import VTooltip from 'v-tooltip';
 
 if (process.env.MIX_SENTRY_DSN_PUBLIC) {
   Sentry.init({
@@ -28,6 +29,7 @@ Vue.use(VueInternationalization);
 Vue.use(VueTimeago, {
   locale: 'en', // Default locale
 });
+Vue.use(VTooltip);
 
 const i18n = new VueInternationalization({
   locale: document.documentElement.lang,

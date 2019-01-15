@@ -12,33 +12,19 @@ class Rom
     /** @var string */
     const ORGINAL_MD5 = 'd38325cffb9ba2e6f57897c0e9564cc0';
     /** @var int */
-    const ROOM_LAYOUT_OFFSET = 0x1f26b;
-    /** @var int */
-    const ROOM_LAYOUTS = 0x6c70;
-    /** @var int */
-    const ROOM_NEW_LAYOUTS = 0x7eea;
+    const ROOM_LAYOUT_OFFSET = 0x1c010;
     /** @var int */
     const ROOM_DATA_OFFSET = 0x648f;
+    /** @var int */
+    const ROOM_PPU_OFFSET = 0x7f91;
+    /** @var int */
+    const MAP_LOCATOR_OFFSET = 0x3ffb0;
     /** @var resource */
     private $rom;
     /** @var string */
     private $tmp_file;
     /** @var array */
     private $write_log = [];
-    /** @var array */
-    protected $remodel_data = [
-        0x0c => [[0x18, 0x19], [0x1c, 0x1d]],
-        0x0d => [[0x3c, 0x3d], [0x40, 0x41]],
-        0x0e => [[0x66, 0x67], [0x68, 0x69]],
-        0x0f => [[0x8a, 0x8b], [0x8e, 0x8f]],
-     ];
-    /** @var array */
-    protected $remodel_blank_data = [
-        0x0c => [[0x10, 0x11], [0x14, 0x15]],
-        0x0d => [[0x34, 0x35], [0x38, 0x39]],
-        0x0e => [[0x5b, 0x5c], [0x5f, 0x60]],
-        0x0f => [[0x6f, 0x70], [0x73, 0x74]],
-     ];
 
     /**
      * Create a new wrapper.
@@ -155,76 +141,23 @@ class Rom
         return count($unpacked) == 1 ? [$unpacked[1]] : array_values($unpacked);
     }
 
+
     /**
-     * remodel a Room for a goonie.
+     * Write Locator Device data for map.
      *
-     * @param int $old_id   room id to clone
-     * @param int $offset   which new offset to use in rom
-     * @param int $palette  palette of room to load correct remodel
-     *
-     * @throws \Exception if reading from rom has incorrect data
+     * @param bool $front   front or back of map
+     * @param int  $locator which locator device
+     * @param int  $address address to write
      *
      * @return $this
      */
-    public function cloneRoomWithCage(int $old_id, int $offset, int $palette): self
+    public function updateMapLocator(bool $front, int $locator, int $address) : self
     {
-        $layout_pointer = self::ROOM_LAYOUT_OFFSET + $old_id * 2;
+        $write_to = self::MAP_LOCATOR_OFFSET + ($front ? 0x00 : 0x18) + ($locator * 4);
 
-        $old_address = $this->read($layout_pointer, 2);
-
-        if (count($old_address) !== 2) {
-            throw new \Exception('Read from rom did not have full address');
-        }
-
-        $old_offset = (int) (($old_address[1] << 8) + $old_address[0] - 0x3ff0);
-
-        $layout = $this->read($old_offset, 16);
-
-        array_splice($layout, 5, 2, $this->remodel_data[$palette][0]);
-        array_splice($layout, 9, 2, $this->remodel_data[$palette][1]);
-
-        $new_address = self::ROOM_NEW_LAYOUTS + $offset * 16;
-        $this->write($new_address, pack('C*', ...$layout));
-
-        $this->write($layout_pointer, pack('S', $new_address + 0x3ff0));
+        $this->write($write_to, pack('n', $address));
 
         return $this;
-    }
-
-    /**
-     * clear cages from layouts that could have had cages.
-     *
-     * @return void
-     */
-    public function remodelOldCageRooms() : void
-    {
-        $goonie_room_data = [
-            0x09 => 0x0c,
-            0x19 => 0x0d,
-            0x36 => 0x0e,
-            0x4e => 0x0f,
-            0x64 => 0x0f,
-            0x76 => 0x0e,
-        ];
-
-        foreach ($goonie_room_data as $room_id => $palette) {
-            $layout_pointer = self::ROOM_LAYOUT_OFFSET + $room_id * 2;
-
-            $address = $this->read($layout_pointer, 2);
-
-            if (count($address) !== 2) {
-                throw new \Exception('Read from rom did not have full address');
-            }
-
-            $layout_offset = (int) (($address[1] << 8) + $address[0] - 0x3ff0);
-
-            $layout = $this->read($layout_offset, 16);
-
-            // remove cage from old room
-            array_splice($layout, 5, 2, $this->remodel_blank_data[$palette][0]);
-            array_splice($layout, 9, 2, $this->remodel_blank_data[$palette][1]);
-            $this->write($layout_offset, pack('C*', ...$layout));
-        }
     }
 
     /**
@@ -236,8 +169,6 @@ class Rom
      */
     public function clearItemsFromRooms() : self
     {
-        $this->remodelOldCageRooms();
-
         for ($i = 0; $i < 127; ++$i) {
             $room_offset = $i * 4 + 0x648f;
             $item_byte = array_first($this->read($room_offset + 3));
