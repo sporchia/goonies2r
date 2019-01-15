@@ -952,7 +952,6 @@ class World
 
             $this->vertices['Front - Orange House Right']->createEdge($this->vertices['Door 2e']);
 
-
             $this->vertices['Room 6f']->createEdge($this->vertices['Room 70']);
 
             $this->vertices['Back - Gray Basement Right']->createEdgeTo($this->vertices['Door 46']);

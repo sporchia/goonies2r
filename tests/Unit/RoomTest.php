@@ -22,7 +22,7 @@ class RoomTest extends TestCase
     }
 
     /**
-     * Tests all room layouts
+     * Tests all room layouts.
      *
      * @dataProvider dataProviderLayouts
      *
@@ -34,7 +34,7 @@ class RoomTest extends TestCase
     }
 
     /**
-     * return all possible layouts
+     * return all possible layouts.
      *
      * @return array
      */

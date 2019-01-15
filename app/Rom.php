@@ -141,7 +141,6 @@ class Rom
         return count($unpacked) == 1 ? [$unpacked[1]] : array_values($unpacked);
     }
 
-
     /**
      * Write Locator Device data for map.
      *

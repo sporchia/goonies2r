@@ -386,6 +386,7 @@ class Room extends Vertex
 
         return $layout;
     }
+
     private function buildLayout0f() : array
     {
         $layout = [
