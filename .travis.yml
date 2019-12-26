@@ -1,10 +1,10 @@
 language: php
 php:
-  - '7.2'
+  - "7.2.18"
 
 cache:
   directories:
-  - node_modules
+    - node_modules
 
 before_script:
   - phpenv config-rm xdebug.ini || true
