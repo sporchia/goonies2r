@@ -43,7 +43,7 @@ class Location extends Vertex
      *
      * @return void
      */
-    public function createEdgeToRoom() : void
+    public function createEdgeToRoom(): void
     {
         $this->edge = $this->createEdge($this->room);
     }
@@ -55,7 +55,7 @@ class Location extends Vertex
      *
      * @return $this
      */
-    public function setRoom(Room $room) : Location
+    public function setRoom(Room $room): Location
     {
         $this->room = $room;
 
@@ -67,7 +67,7 @@ class Location extends Vertex
      *
      * @return \App\Room
      */
-    public function getRoom(Item $item = null) : Room
+    public function getRoom(): Room
     {
         return $this->room;
     }
@@ -81,7 +81,7 @@ class Location extends Vertex
      *
      * @return $this
      */
-    public function setItem(Item $item = null) : Location
+    public function setItem(Item $item = null): Location
     {
         if ($item instanceof Item\Goonie || $item instanceof Item\Hint) {
             throw new \Exception('Invalid Item assignment');
@@ -101,7 +101,7 @@ class Location extends Vertex
      *
      * @return bool
      */
-    public function hasItem(Item $item = null) : bool
+    public function hasItem(Item $item = null): bool
     {
         return $item ? $this->item == $item : $this->item !== null;
     }
@@ -111,7 +111,7 @@ class Location extends Vertex
      *
      * @return \App\Item|null
      */
-    public function getItem() : ?Item
+    public function getItem(): ?Item
     {
         return $this->item;
     }
@@ -125,7 +125,7 @@ class Location extends Vertex
      *
      * @return $this
      */
-    public function writeItem(Rom $rom) : Location
+    public function writeItem(Rom $rom): Location
     {
         if (!$this->item) {
             throw new \Exception('No Item set to be written');
@@ -146,7 +146,7 @@ class Location extends Vertex
      *
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return (string) $this->name;
     }
@@ -156,7 +156,7 @@ class Location extends Vertex
      *
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getName();
     }

@@ -74,7 +74,7 @@ export default {
     ]),
     handleFileLoad(file) {
       this.error = null;
-      this.loadFile(file)
+      return this.loadFile(file)
         .then(res => {
           this.loadFromHash(this.hash);
         })

@@ -1,11 +1,14 @@
-import axios from 'axios';
-import BPS from '../bps';
-import localforage from 'localforage';
-import SparkMD5 from 'spark-md5';
-import Vuex from 'vuex';
+import axios from "axios";
+import BPS from "../bps";
+import localforage from "localforage";
+import SparkMD5 from "spark-md5";
+import Vuex from "vuex";
+import Vue from "vue";
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV !== "production",
   state: {
     romFile: null,
     patchedFile: null,
@@ -13,8 +16,16 @@ export default new Vuex.Store({
     fileLoaded: false,
     filePatched: false,
     loaded: false,
+    options: {
+      shuffleGoonies: true,
+      shuffleItems: true,
+      shuffleAnnie: false,
+    },
   },
   mutations: {
+    setOptions(state, options) {
+      state.options = options;
+    },
     clearFile(state) {
       state.romFile = null;
       state.fileLoaded = false;
@@ -36,24 +47,34 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    setOptions({ commit, state }, payload) {
+      commit("setOptions", {
+        ...state.options,
+        ...payload,
+      });
+    },
     clearFile({ commit }) {
-      commit('clearFile');
+      commit("clearFile");
     },
     loadFromCache({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
-        return localforage.getItem('g2.base_rom').then(buffer => {
-          return dispatch('loadFile', new Blob([buffer]));
-        }).then(() => {
-          commit('setLoaded', {
-            loaded: true,
+        return localforage
+          .getItem("g2.base_rom")
+          .then(buffer => {
+            return dispatch("loadFile", new Blob([buffer]));
+          })
+          .then(() => {
+            commit("setLoaded", {
+              loaded: true,
+            });
+            resolve();
+          })
+          .catch(error => {
+            commit("setLoaded", {
+              loaded: true,
+            });
+            reject(error);
           });
-          resolve();
-        }).catch(error => {
-          commit('setLoaded', {
-            loaded: true,
-          });
-          reject(error);
-        });
       });
     },
     loadFile({ commit }, file) {
@@ -61,23 +82,30 @@ export default new Vuex.Store({
         const fileReader = new FileReader();
 
         fileReader.onload = function(event) {
-          let arrayBuffer = event.target.result;
+          const arrayBuffer = event.target.result;
 
-          if (typeof arrayBuffer === 'undefined') {
-            reject(new Error('Could not load file'));
+          if (typeof arrayBuffer === "undefined") {
+            reject(new Error("Could not load file"));
             return;
           }
 
-          if (SparkMD5.ArrayBuffer.hash(arrayBuffer) !== 'd38325cffb9ba2e6f57897c0e9564cc0') {
-            reject(new Error('Uploaded file MD5 does not match, perhaps the wrong file?'));
+          if (
+            SparkMD5.ArrayBuffer.hash(arrayBuffer) !==
+            "d38325cffb9ba2e6f57897c0e9564cc0"
+          ) {
+            reject(
+              new Error(
+                "Uploaded file MD5 does not match, perhaps the wrong file?"
+              )
+            );
             return;
           }
 
-          commit('loadFile', {
+          commit("loadFile", {
             romFile: arrayBuffer,
           });
 
-          localforage.setItem('g2.base_rom', arrayBuffer);
+          localforage.setItem("g2.base_rom", arrayBuffer);
 
           resolve(arrayBuffer);
         };
@@ -86,48 +114,62 @@ export default new Vuex.Store({
       });
     },
     clearRandomized({ commit }) {
-      commit('setUnpatched');
+      commit("setUnpatched");
     },
     loadFromHash({ commit, state }, hash) {
       return new Promise((resolve, reject) => {
-        commit('setUnpatched');
+        commit("setUnpatched");
 
-        axios.post(`/hash`, {
-          hash: hash,
-        }, {
-          responseType: 'arraybuffer',
-        }).then(patch => {
-          const patcher = new BPS(patch.data);
-          const patchedFile = patcher.apply(state.romFile);
+        axios
+          .post(
+            `/hash`,
+            {
+              hash: hash,
+            },
+            {
+              responseType: "arraybuffer",
+            }
+          )
+          .then(patch => {
+            const patcher = new BPS();
+            patcher.setPatch(patch.data);
+            patcher.setSource(state.romFile);
+            const patchedFile = patcher.applyPatch();
 
-          commit('loadPatchedFile', {
-            patchedFile: patchedFile,
-            patchedMeta: patcher.meta,
+            commit("loadPatchedFile", {
+              patchedFile: patchedFile,
+              patchedMeta: patcher.meta,
+            });
+            resolve(patchedFile);
+          })
+          .catch(error => {
+            reject(error);
           });
-          resolve(patchedFile);
-        }).catch(error => {
-          reject(error);
-        });
       });
     },
     randomize({ commit, state }) {
       return new Promise((resolve, reject) => {
-        commit('setUnpatched');
+        commit("setUnpatched");
 
-        axios.post(`/randomize`, [], {
-          responseType: 'arraybuffer',
-        }).then(patch => {
-          const patcher = new BPS(patch.data);
-          const patchedFile = patcher.apply(state.romFile);
+        axios
+          .post(`/randomize`, state.options, {
+            responseType: "arraybuffer",
+          })
+          .then(patch => {
+            const patcher = new BPS();
+            patcher.setPatch(patch.data);
+            patcher.setSource(state.romFile);
+            const patchedFile = patcher.applyPatch();
 
-          commit('loadPatchedFile', {
-            patchedFile: patchedFile,
-            patchedMeta: patcher.meta,
+            commit("loadPatchedFile", {
+              patchedFile: patchedFile,
+              patchedMeta: patcher.meta,
+            });
+            resolve(patchedFile);
+          })
+          .catch(error => {
+            reject(error);
           });
-          resolve(patchedFile);
-        }).catch(error => {
-          reject(error);
-        });
       });
     },
   },

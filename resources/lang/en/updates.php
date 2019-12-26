@@ -3,13 +3,24 @@
 return [
     'header' => 'Updates',
     'cards' => [
+        'v3' => [
+            'header' => 'v3',
+            'content' => [
+                '<ul>'
+                    . '<li>Item drops from enemies will always drop a key or bomb first if you have none.</li>'
+                    . '<li>Fixed a bug with NPC’s with an item would give multiple items.</li>'
+                    . '<li>Fixed bug where Goonies in their vanilla locations were hidden.</li>'
+                    . '<li>Added missing item location.</li>'
+                    . '</ul>',
+            ],
+        ],
         'v2' => [
             'header' => 'v2',
             'content' => [
                 '<ul>'
                     . '<li>Magic Locator Devices should show on map to the proper Goonie.</li>'
                     . '<li>Graphics have been added to show if you need to Hammer or Glasses in a room.</li>'
-                . '</ul>',
+                    . '</ul>',
             ],
         ],
         'v1' => [
@@ -27,7 +38,7 @@ return [
                     . '<li>Updated start screen.</li>'
                     . '<li>You can pause the game with Select and in the Overworld press UP+A to be warped to the starting area.</li>'
                     . '<li>You only need to punch the old lady once to get her item.</li>'
-                . '</ul>',
+                    . '</ul>',
             ],
         ],
     ],

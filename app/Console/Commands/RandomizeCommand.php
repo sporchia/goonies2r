@@ -20,11 +20,11 @@ class RandomizeCommand extends Command
      * @var string
      */
     protected $signature = 'randomize {input_file=goonies2.nes : base rom to randomize}'
-    . ' {output_directory=./ : where to place randomized rom}'
-    . ' {--spoiler : generate a spoiler file}'
-    . ' {--no-rom : no not generate output rom}'
-    . ' {--bps : make a bps file}'
-    . ' {--graph : make a graph image}';
+        . ' {output_directory=./ : where to place randomized rom}'
+        . ' {--spoiler : generate a spoiler file}'
+        . ' {--no-rom : no not generate output rom}'
+        . ' {--bps : make a bps file}'
+        . ' {--graph : make a graph image}';
 
     /**
      * The console command description.
@@ -100,6 +100,8 @@ class RandomizeCommand extends Command
             // @codeCoverageIgnoreEnd
         }
 
+        $spoiler = $rand->getSpoiler($world);
+
         if ($this->option('bps')) {
             // @codeCoverageIgnoreStart
             $output_file = sprintf('%s/G2-VT_%s.bps', $outputDirectory, $hash);
@@ -120,7 +122,11 @@ class RandomizeCommand extends Command
 
             $rom->save($tmp_file);
 
-            $data = $flips->createBpsFromFiles(env('ROM_BASE') ?? $inputFile, $tmp_file);
+            $data = $flips->createBpsFromFiles(env('ROM_BASE') ?? $inputFile, $tmp_file, [
+                'created' => now()->toIso8601String(),
+                'version' => RandomizerService::VERSION,
+                'meta'    => $spoiler['meta'],
+            ]);
 
             file_put_contents($output_file, $data);
 
@@ -139,7 +145,7 @@ class RandomizeCommand extends Command
                 return 105;
             }
 
-            file_put_contents($spoiler_file, json_encode($rand->getSpoiler(), JSON_PRETTY_PRINT));
+            file_put_contents($spoiler_file, json_encode($spoiler, JSON_PRETTY_PRINT));
             Log::info(sprintf('Spoiler Saved: %s', $spoiler_file));
             $this->info(sprintf('Spoiler Saved: %s', $spoiler_file));
             // @codeCoverageIgnoreEnd

@@ -8,15 +8,14 @@
  | file for the application as well as bundling up all the JS files.
  |
  */
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 mix.webpackConfig({
-  plugins: [
-    new BundleAnalyzerPlugin(),
-  ],
+  plugins: [new BundleAnalyzerPlugin()],
 });
 // */
 
@@ -25,21 +24,23 @@ mix.webpackConfig({
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx'],
+    extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"],
   },
 });
 
 mix.options({
   hmrOptions: {
-    port: '3032',
+    host: "localhost",
+    port: "3032",
   },
 });
 
-mix.js('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css');
+mix
+  .js("resources/js/app.js", "public/js")
+  .sass("resources/sass/app.scss", "public/css");

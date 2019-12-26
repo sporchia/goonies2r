@@ -4,7 +4,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="{{ app()->isLocale('en') ? '' : '/' . app()->getLocale() }}/">
-            <img src="/img/logo_sm.png" title="Goonies 2 Randomizer" alt="Goonies 2 Randomizer logo" />
+            <img src="/img/logo_113.png" title="Goonies 2 Randomizer" alt="Goonies 2 Randomizer logo" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

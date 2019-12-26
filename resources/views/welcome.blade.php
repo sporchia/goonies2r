@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="text-center">
-    <img src="img/logo.png">
+    <picture>
+        <source srcset="/img/logo_113.png" media="(max-width: 226px)">
+        <source srcset="/img/logo_226.png" media="(max-width: 452px)">
+        <source srcset="/img/logo_452.png" media="(max-width: 904px)">
+        <img src="/img/logo_904.png" alt="Goonies 2: Randomizer VT">
+    </picture>
     <div class="btn-wrapper">
         <div class="btn-cta mt-2">
             <a class="btn btn-primary btn-lg" href="/{{ app()->getLocale() }}/start" role="button">{{ __('navigation.start_playing') }}</a>

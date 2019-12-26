@@ -22,6 +22,18 @@ class RoomTest extends TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testLayoutThrowsOnBadPalette() : void
+    {
+        $this->expectException(\Exception::class);
+
+        $room = new Room(new Graph, 'bad palette', 0x00, 0x00, 0x00, 0x01);
+
+        $room->getLayout();
+    }
+
+    /**
      * Tests all room layouts.
      *
      * @dataProvider dataProviderLayouts

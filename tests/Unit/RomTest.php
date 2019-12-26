@@ -10,7 +10,7 @@ class RomTest extends TestCase
     /**
      * @return void
      */
-    public function testReadFile()
+    public function testReadFile(): void
     {
         $rom = new Rom(base_path('tests/Unit/samples/bytes.bin'));
 
@@ -20,7 +20,7 @@ class RomTest extends TestCase
     /**
      * @return void
      */
-    public function testLoadFileThrowsOnBadFile()
+    public function testLoadFileThrowsOnBadFile(): void
     {
         $this->expectException(\Exception::class);
 
@@ -28,9 +28,45 @@ class RomTest extends TestCase
     }
 
     /**
+     * @covers App\Rom::setTextSpeed
+     *
+     * @dataProvider textSpeeds
+     *
+     * @param string  $speed  speed key
+     * @param int  $byte  frame delay
+     * @param int  $sfx  sound effect to plat
+     *
      * @return void
      */
-    public function testWriteLogEmptyBeforeWrites()
+    public function testSetTextSpeed(string $speed, int $byte, int $sfx): void
+    {
+        $rom = new Rom;
+
+        $rom->setTextSpeed($speed);
+
+        $this->assertEquals([[$byte], [$sfx]], [$rom->read(0x4027), $rom->read(0x406d)]);
+    }
+
+    /**
+     * Speed text provider.
+     *
+     * @return array
+     */
+    public function textSpeeds(): array
+    {
+        return [
+            ['instant', 0x00, 0x00],
+            ['fast', 0x01, 0x05],
+            ['default', 0x05, 0x03],
+        ];
+    }
+
+    /**
+     * @covers App\Rom::getWriteLog
+     *
+     * @return void
+     */
+    public function testWriteLogEmptyBeforeWrites(): void
     {
         $rom = new Rom;
 
@@ -38,9 +74,11 @@ class RomTest extends TestCase
     }
 
     /**
+     * @covers App\Rom::getWriteLog
+     *
      * @return void
      */
-    public function testWriteLog()
+    public function testWriteLog(): void
     {
         $rom = new Rom;
 
@@ -50,9 +88,11 @@ class RomTest extends TestCase
     }
 
     /**
+     * @covers App\Rom::save
+     *
      * @return void
      */
-    public function testSaveFile()
+    public function testSaveFile(): void
     {
         $tmp_file = tempnam(sys_get_temp_dir(), __CLASS__);
         $rom = new Rom(base_path('tests/Unit/samples/bytes.bin'));

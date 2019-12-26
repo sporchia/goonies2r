@@ -7,11 +7,20 @@
 
     <div class="card border-info mt-4">
         <div class="card-header bg-info">
-            <h3 class="card-title text-white">{{ __('options.cards.coming.header') }}</h3>
+            <h3 class="card-title text-white">{{ __('options.cards.options.header') }}</h3>
         </div>
         <div class="card-body bg-dark">
-            @foreach (__('options.cards.coming.content') as $block)
-                <p>{!! $block !!}</p>
+            @foreach (__('options.cards.options.content') as $block)
+                @if (is_array($block))
+                    <div class="ml-3">
+                        <h4>{{ $block['header'] }}</h4>
+                        @foreach ($block['content'] as $subblock)
+                            <p>{!! $subblock !!}</p>
+                        @endforeach
+                    </div>
+                @else
+                    <p>{!! $block !!}</p>
+                @endif
             @endforeach
         </div>
     </div>
@@ -41,7 +50,7 @@
 				</div>
 				<div class="col-md-6">
 					<ul>
-                        <li>1x Hyper Shoes</li>
+                        <li>2x Hyper Shoes</li>
                         <li>1x Jump Shoes</li>
                         <li>1x Bulletproof Vest</li>
                         <li>4x Key Rings</li>

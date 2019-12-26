@@ -7,6 +7,7 @@ use App\Location;
 use App\Rom;
 use App\Room;
 use Fhaculty\Graph\Graph;
+use Illuminate\Support\Facades\Log;
 
 /**
  * A Location is any place an Item can be found in game.
@@ -29,7 +30,7 @@ class Cage extends Location
     /**
      * {@inheritdoc}
      */
-    public function createEdgeToRoom() : void
+    public function createEdgeToRoom(): void
     {
         parent::createEdgeToRoom();
 
@@ -43,13 +44,13 @@ class Cage extends Location
      *
      * @return $this
      */
-    public function setRoom(Room $room) : Location
+    public function setRoom(Room $room): Location
     {
-        $this->room->setCage(false);
-
         $this->room = $room;
 
         $room->setCage(true);
+
+        Log::debug(sprintf('Caging Room %02x', $this->room->getRoomId()));
 
         return $this;
     }
@@ -63,7 +64,7 @@ class Cage extends Location
      *
      * @return $this
      */
-    public function setItem(Item $item = null) : Location
+    public function setItem(Item $item = null): Location
     {
         if (!$item instanceof Item\Goonie) {
             throw new \Exception('Invalid Item assignment');
@@ -85,7 +86,7 @@ class Cage extends Location
      *
      * @return $this
      */
-    public function writeItem(Rom $rom) : Location
+    public function writeItem(Rom $rom): Location
     {
         parent::writeItem($rom);
 

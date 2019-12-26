@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -67,9 +68,36 @@ class Rom
      *
      * @return string
      */
-    public function getMD5() : string
+    public function getMD5(): string
     {
         return hash_file('md5', $this->tmp_file);
+    }
+
+    /**
+     * Set text speed.
+     *
+     * @param string  $speed  speed key.
+     *
+     * @return void
+     */
+    public function setTextSpeed(string $speed): void
+    {
+        switch ($speed) {
+            case 'instant':
+                $this->write(0x4027, pack('C', 0x00)); // speed
+                $this->write(0x406d, pack('C', 0x00)); // sfx
+
+                return;
+            case 'fast':
+                $this->write(0x4027, pack('C', 0x01)); // speed
+                $this->write(0x406d, pack('C', 0x05)); // sfx
+
+                return;
+            default:
+                $this->write(0x4027, pack('C', 0x05)); // speed
+                $this->write(0x406d, pack('C', 0x03)); // sfx
+
+        }
     }
 
     /**
@@ -79,7 +107,7 @@ class Rom
      *
      * @return bool
      */
-    public function save(string $output_location) : bool
+    public function save(string $output_location): bool
     {
         return copy($this->tmp_file, $output_location);
     }
@@ -91,9 +119,9 @@ class Rom
      * @param string $data data to write to the ROM
      * @param bool $log write this write to the log
      *
-     * @return $this
+     * @return void
      */
-    public function write(int $offset, string $data, bool $log = true) : self
+    public function write(int $offset, string $data, bool $log = true): void
     {
         if ($log) {
             $unpacked = array_values(unpack('C*', $data));
@@ -101,8 +129,6 @@ class Rom
         }
         fseek($this->rom, $offset);
         fwrite($this->rom, $data);
-
-        return $this;
     }
 
     /**
@@ -110,7 +136,7 @@ class Rom
      *
      * @return array
      */
-    public function getWriteLog() : array
+    public function getWriteLog(): array
     {
         return $this->write_log;
     }
@@ -124,7 +150,7 @@ class Rom
      *
      * @return array
      */
-    public function read(int $offset, int $length = 1) : array
+    public function read(int $offset, int $length = 1): array
     {
         fseek($this->rom, $offset);
         $data = fread($this->rom, $length);
@@ -148,15 +174,13 @@ class Rom
      * @param int  $locator which locator device
      * @param int  $address address to write
      *
-     * @return $this
+     * @return void
      */
-    public function updateMapLocator(bool $front, int $locator, int $address) : self
+    public function updateMapLocator(bool $front, int $locator, int $address): void
     {
         $write_to = self::MAP_LOCATOR_OFFSET + ($front ? 0x00 : 0x18) + ($locator * 4);
 
         $this->write($write_to, pack('n', $address));
-
-        return $this;
     }
 
     /**
@@ -164,21 +188,19 @@ class Rom
      *
      * @todo this currently skips NPC's
      *
-     * @return $this
+     * @return void
      */
-    public function clearItemsFromRooms() : self
+    public function clearItemsFromRooms(): void
     {
         for ($i = 0; $i < 127; ++$i) {
             $room_offset = $i * 4 + 0x648f;
-            $item_byte = array_first($this->read($room_offset + 3));
+            $item_byte = Arr::first($this->read($room_offset + 3));
             if ($item_byte != 0x00 && ($item_byte < 0x80 || $item_byte > 0x8f)) {
                 Log::debug(sprintf('Clearing Room: %02x Byte: %02x', $i, $item_byte));
                 $this->write($room_offset + 3, pack('C', 0x00));
                 $this->write($room_offset + 1, pack('C', 0x00));
             }
         }
-
-        return $this;
     }
 
     /**

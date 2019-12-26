@@ -20,7 +20,7 @@ return [
         'emulator' => [
             'header' => '3. Get a Way to Play',
             'content' => [
-                'First, you’ll need something to run your newly minted game on. We recommend using an emulator. An emulator is a program that closely replicates NES hardware, allowing you to run NES games on your computer. You can get the recommended emulator, FCEUX, at their website <a href="http://www.fceux.com/" target="_blank" rel="noopener noreferrer">here</a>.',
+                'First, you’ll need something to run your newly minted game on. We recommend using an emulator. An emulator is a program that closely replicates NES hardware, allowing you to run NES games on your computer. We recommend the FCEUX emulator, find out more at the <a href="http://www.fceux.com/" target="_blank" rel="noopener noreferrer">FCEUX website</a>.',
                 'There are other supported ways to play, including on original NES hardware.',
             ],
         ],
@@ -31,7 +31,7 @@ return [
                 '<ul>'
                     . '<li>You can pause the game with Select and in the Overworld press UP+A to be warped to the starting area.</li>'
                     . '<li>You only need to punch the old lady once to get her item.</li>'
-                . '</ul>',
+                    . '</ul>',
             ],
         ],
     ],

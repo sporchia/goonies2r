@@ -55,6 +55,7 @@ class Room extends Vertex
             'safe' => false,
             'water' => false,
             'cage' => false,
+            'annie' => false,
         ];
 
         if ($this->meta['dark']) {
@@ -64,18 +65,17 @@ class Room extends Vertex
     }
 
     /**
-     * Determine if we can even put a Goonie in this room, currently we don't move Annie.
+     * Determine if we can even put a Goonie in this room.
      *
      * @return bool
      */
-    public function canHoldGoonie() : bool
+    public function canHoldGoonie(): bool
     {
         return !$this->meta['item_glasses']
             && !$this->meta['item_hammer']
             && !$this->meta['item_punch']
             && !$this->meta['item_visible']
-            && !$this->meta['up']
-            && $this->name !== 'Annie';
+            && !$this->meta['up'];
     }
 
     /**
@@ -83,7 +83,7 @@ class Room extends Vertex
      *
      * @return int
      */
-    public function getRoomId() : int
+    public function getRoomId(): int
     {
         return $this->room_id;
     }
@@ -95,7 +95,7 @@ class Room extends Vertex
      *
      * @return void
      */
-    public function setSafe(bool $safe = false) : void
+    public function setSafe(bool $safe = false): void
     {
         $this->meta['safe'] = $safe;
     }
@@ -107,9 +107,21 @@ class Room extends Vertex
      *
      * @return void
      */
-    public function setCage(bool $cage = false) : void
+    public function setCage(bool $cage = false): void
     {
         $this->meta['cage'] = $cage;
+    }
+
+    /**
+     * Set if this is the end of the game.
+     *
+     * @param bool $annie whether or not this is the end of game
+     *
+     * @return void
+     */
+    public function setAnnie(bool $annie = false): void
+    {
+        $this->meta['annie'] = $annie;
     }
 
     /**
@@ -119,7 +131,7 @@ class Room extends Vertex
      *
      * @return void
      */
-    public function setWater(bool $water = false) : void
+    public function setWater(bool $water = false): void
     {
         $this->meta['water'] = $water;
     }
@@ -131,27 +143,46 @@ class Room extends Vertex
      *
      * @return void
      */
-    public function writeToRom(Rom $rom) : void
+    public function writeToRom(Rom $rom): void
     {
         $room_layout_offset = $this->getRoomId() * 16 + Rom::ROOM_LAYOUT_OFFSET;
         $room_ppu_offset = $this->getRoomId() + Rom::ROOM_PPU_OFFSET;
+
+        // Force final palette
+        if ($this->meta['annie']) {
+            $this->meta['palette'] = 0x10;
+        }
 
         $rom->write($room_layout_offset, pack('C*', ...$this->getLayout()));
         $rom->write($room_ppu_offset, pack('C', $this->meta['palette']));
     }
 
-    public function getLayout() : array
+    /**
+     * Get the layout bytes for the designed room.
+     *
+     * @throws \Exception when invalid palette is selected
+     *
+     * @return array
+     */
+    public function getLayout(): array
     {
         switch ($this->meta['palette']) {
-            case 0x0c: return $this->buildLayout0c();
-            case 0x0d: return $this->buildLayout0d();
-            case 0x0e: return $this->buildLayout0e();
-            case 0x0f: return $this->buildLayout0f();
-            case 0x10: return $this->buildLayout10();
+            case 0x0c:
+                return $this->buildLayout0c();
+            case 0x0d:
+                return $this->buildLayout0d();
+            case 0x0e:
+                return $this->buildLayout0e();
+            case 0x0f:
+                return $this->buildLayout0f();
+            case 0x10:
+                return $this->buildLayout10();
         }
+
+        throw new \Exception('Uknown palette selected.');
     }
 
-    private function buildLayout0c() : array
+    private function buildLayout0c(): array
     {
         $layout = [
             0x0a, 0x0c, 0x0c, 0x0b,
@@ -228,7 +259,7 @@ class Room extends Vertex
         return $layout;
     }
 
-    private function buildLayout0d() : array
+    private function buildLayout0d(): array
     {
         $layout = [
             0x2e, 0x31, 0x31, 0x2f,
@@ -310,7 +341,7 @@ class Room extends Vertex
         return $layout;
     }
 
-    private function buildLayout0e() : array
+    private function buildLayout0e(): array
     {
         $layout = [
             0x56, 0x57, 0x58, 0x59,
@@ -387,7 +418,7 @@ class Room extends Vertex
         return $layout;
     }
 
-    private function buildLayout0f() : array
+    private function buildLayout0f(): array
     {
         $layout = [
             0x6a, 0x6b, 0x6c, 0x6d,
@@ -472,7 +503,7 @@ class Room extends Vertex
         return $layout;
     }
 
-    private function buildLayout10() : array
+    private function buildLayout10(): array
     {
         return [
             0x9a, 0x9b, 0xa6, 0xa5,

@@ -34,7 +34,7 @@ class LocationCollection extends Collection
      *
      * @return static
      */
-    public function getEmptyLocations() : self
+    public function getEmptyLocations(): self
     {
         return $this->filter(function ($location) {
             return !$location->hasItem();
@@ -46,7 +46,7 @@ class LocationCollection extends Collection
      *
      * @return static
      */
-    public function getNonEmptyLocations() : self
+    public function getNonEmptyLocations(): self
     {
         return $this->filter(function ($location) {
             return $location->hasItem();
@@ -54,14 +54,15 @@ class LocationCollection extends Collection
     }
 
     /**
-     * Deterime if the Locations given has at least a particular amount of a particular Item.
+     * Deterime if the Locations given has at least a particular amount of a
+     * particular Item.
      *
-     * @param \App\Item $item Item to search for
-     * @param int $count the required minimum number of Items
+     * @param \App\Item  $item  Item to search for
+     * @param int  $count  the required minimum number of Items
      *
      * @return bool
      */
-    public function itemInLocations(Item $item, int $count = 1) : bool
+    public function itemInLocations(Item $item, int $count = 1): bool
     {
         foreach ($this->items as $location) {
             if ($location->hasItem($item)) {
@@ -77,13 +78,18 @@ class LocationCollection extends Collection
      *
      * @return \App\Support\ItemCollection
      */
-    public function getItems() : ItemCollection
+    public function getItems(): ItemCollection
     {
-        return new ItemCollection(array_map(function ($location) {
-            return $location->getItem();
-        }, $this->filter(function ($location) {
-            return $location->hasItem();
-        })->all()));
+        $items = [];
+
+        foreach ($this->items as $location) {
+            $item = $location->getItem();
+            if ($item !== null) {
+                $items[] = $item;
+            }
+        }
+
+        return new ItemCollection($items);
     }
 
     /**
@@ -93,7 +99,7 @@ class LocationCollection extends Collection
      *
      * @return static
      */
-    public function locationsWithItem(Item $item) : self
+    public function locationsWithItem(Item $item): self
     {
         return $this->filter(function ($location) use ($item) {
             return $location->hasItem($item);

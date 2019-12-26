@@ -2,6 +2,10 @@ language: php
 php:
   - '7.2'
 
+cache:
+  directories:
+  - node_modules
+
 before_script:
   - phpenv config-rm xdebug.ini || true
   - composer install --no-interaction
@@ -12,6 +16,8 @@ before_script:
 script:
   - composer test
   - php artisan code:analyse
+  - npm test
+  - npm run coverage
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v

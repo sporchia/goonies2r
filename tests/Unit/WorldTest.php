@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Item;
+use App\Room;
 use App\Support\ItemCollection;
 use App\World;
 use Fhaculty\Graph\Graph;
@@ -16,7 +17,7 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testCanGetToAnnieWithAllItems()
+    public function testCanGetToAnnieWithAllItems(): void
     {
         $world = new World(Item::all());
 
@@ -28,7 +29,7 @@ class WorldTest extends TestCase
     /**
      * @return void
      */
-    public function testFirstGoonieOnlyRequiresHammerAndKeys()
+    public function testFirstGoonieOnlyRequiresHammerAndKeys(): void
     {
         $world = new World(new ItemCollection([Item::get('Hammer'), Item::get('KeysC0')]));
 
@@ -42,7 +43,7 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldCreatesGraph()
+    public function testWorldCreatesGraph(): void
     {
         $world = new World(new ItemCollection);
 
@@ -54,7 +55,7 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldNoPrefilledItems()
+    public function testWorldNoPrefilledItems(): void
     {
         $world = new World(new ItemCollection);
         $start = $world->getVertex('Start');
@@ -67,11 +68,11 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldAllLocationsEmpty()
+    public function testWorldAllLocationsEmpty(): void
     {
         $world = new World(new ItemCollection);
 
-        $this->assertEquals(48, $world->getEmptyLocations()->count());
+        $this->assertEquals(49, $world->getEmptyLocations()->count());
     }
 
     /**
@@ -79,11 +80,11 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldCorrectNumberOfLocations()
+    public function testWorldCorrectNumberOfLocations(): void
     {
         $world = new World(new ItemCollection);
 
-        $this->assertEquals(48, $world->getLocations()->count());
+        $this->assertEquals(49, $world->getLocations()->count());
     }
 
     /**
@@ -91,7 +92,7 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldCorrectNumberOfReachableVertices()
+    public function testWorldCorrectNumberOfReachableVertices(): void
     {
         $world = new World(new ItemCollection);
 
@@ -106,7 +107,7 @@ class WorldTest extends TestCase
      *
      * @return void
      */
-    public function testWorldChangereachableVertices()
+    public function testWorldChangereachableVertices(): void
     {
         $world = new World(new ItemCollection);
 
@@ -121,14 +122,67 @@ class WorldTest extends TestCase
     }
 
     /**
+     * @covers App\World::getLocation
+     *
      * @return void
      */
-    public function testBadLocationException()
+    public function testBadLocationException(): void
     {
         $this->expectException(\OutOfBoundsException::class);
 
         $world = new World(new ItemCollection);
 
-        $start = $world->getLocation('This test location does not exist');
+        $world->getLocation('This test location does not exist');
+    }
+
+    /**
+     * @covers App\World::getRoom
+     *
+     * @return void
+     */
+    public function testBadRoomException(): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+
+        $world = new World(new ItemCollection);
+
+        $world->getRoom('This test room does not exist');
+    }
+
+    /**
+     * @covers App\World::getRoom
+     *
+     * @return void
+     */
+    public function testGetRoom(): void
+    {
+        $world = new World(new ItemCollection);
+
+        $room = $world->getRoom('Room 01');
+
+        $this->assertEquals(0x01, $room->getRoomId());
+    }
+
+    /**
+     * @covers App\World::getPotentialGoonieRooms
+     *
+     * @return void
+     */
+    public function testGetPotentialGoonieRoomsDoesNotReturnFilledRooms(): void
+    {
+        $world = new World(new ItemCollection);
+
+        $annieCage = $world->getLocation('Annie');
+        $annieCage->setItem(Item::get('Annie'));
+
+        $room = $world->getRoom('Room 7c');
+
+        $annieCage->setRoom($room);
+
+        $rooms = $world->getPotentialGoonieRooms()->map(function (Room $room) {
+            return $room->getRoomId();
+        });
+
+        $this->assertNotContains(0x7c, $rooms);
     }
 }

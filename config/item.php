@@ -31,7 +31,7 @@ return [
     'junk' => [
         'Helmet' => 1,
         'Raincoat' => 1,
-        'HyperShoes' => 1,
+        'HyperShoes' => 2,
         'Vest' => 1,
         'KeysC1' => 1,
         'KeysC2' => 1,

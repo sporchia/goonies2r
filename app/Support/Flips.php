@@ -15,15 +15,15 @@ class Flips
     /**
      * Generate a BPS file from source and target files.
      *
-     * @param string $original location of source file
-     * @param string $modified location of target file
-     * @param array  $metaData data to be added to metadata, will be encoded as json
+     * @param string  $original  location of source file
+     * @param string  $modified  location of target file
+     * @param array  $metaData  data to be added to json metadata
      *
-     * @throws \Exception if unable to create temporary files or create the bps
+     * @throws \Exception  if unable to create temporary files or create the bps
      *
      * @return string
      */
-    public function createBpsFromFiles(string $original, string $modified, array $metaData = []) : string
+    public function createBpsFromFiles(string $original, string $modified, array $metaData = []): string
     {
         if (!is_readable($modified) || !is_readable($original)) {
             throw new \Exception('Source Files not readable');
@@ -57,8 +57,10 @@ class Flips
         ]);
 
         if ('phpdbg' === PHP_SAPI) {
+            // @codeCoverageIgnoreStart
             $proc->setTty(true);
             $proc->disableOutput();
+            // @codeCoverageIgnoreEnd
         }
 
         Log::debug($proc->getCommandLine());
@@ -86,16 +88,18 @@ class Flips
     }
 
     /**
-     * Apply a BPS file to a source file and get back a data string of patched file.
+     * Apply a BPS file to a source file and get back a data string of patched
+     * file.
      *
-     * @param string $original Source file location to apply patch to
-     * @param string $bps      BPS file location
+     * @param string  $original  Source file location to apply patch to
+     * @param string  $bps  BPS file location
      *
-     * @throws \Exception if unable to create temporary files or create the patched file
+     * @throws \Exception  if unable to create temporary files or create the
+     * patched file
      *
      * @return string
      */
-    public function applyBpsToFile(string $original, string $bps) : string
+    public function applyBpsToFile(string $original, string $bps): string
     {
         if (!is_readable($bps) || !is_readable($original)) {
             throw new \Exception('Source Files not readable');
@@ -119,8 +123,10 @@ class Flips
         ]);
 
         if ('phpdbg' === PHP_SAPI) {
+            // @codeCoverageIgnoreStart
             $proc->setTty(true);
             $proc->disableOutput();
+            // @codeCoverageIgnoreEnd
         }
 
         Log::debug($proc->getCommandLine());

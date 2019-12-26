@@ -24,7 +24,11 @@ class ItemCollection extends Collection
             if (!$item instanceof Item) {
                 throw new \Exception('Trying to add non Item to ItemCollection');
             }
-            $this->items[$item->getName()] = $item;
+            $itemName = $item->getName();
+            if (isset($this->items[$itemName])) {
+                $itemName = "_$itemName";
+            }
+            $this->items[$itemName] = $item;
         }
     }
 
@@ -33,7 +37,7 @@ class ItemCollection extends Collection
      *
      * @return bool
      */
-    public function hasKeys() : bool
+    public function hasKeys(): bool
     {
         return $this->has('KeysC0')
             || $this->has('KeysC1')
@@ -46,7 +50,7 @@ class ItemCollection extends Collection
      *
      * @return bool
      */
-    public function hasBombs() : bool
+    public function hasBombs(): bool
     {
         return $this->has('BombsC4')
             || $this->has('BombsC5')
@@ -57,7 +61,7 @@ class ItemCollection extends Collection
     /**
      * {@inheritdoc}
      */
-    public function shuffle($seed = null) : self
+    public function shuffle($seed = null): self
     {
         return parent::shuffle($seed);
     }

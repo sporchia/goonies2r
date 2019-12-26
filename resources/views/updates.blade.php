@@ -5,6 +5,17 @@
 <div class="card card-body bg-dark">
     <div class="card border-info mt-4">
         <div class="card-header bg-info">
+            <h3 class="card-title text-white">{{ __('updates.cards.v3.header') }}</h3>
+        </div>
+        <div class="card-body bg-dark text-white">
+            @foreach (__('updates.cards.v3.content') as $block)
+                <p>{!! $block !!}</p>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="card border-info mt-4">
+        <div class="card-header bg-info">
             <h3 class="card-title text-white">{{ __('updates.cards.v2.header') }}</h3>
         </div>
         <div class="card-body bg-dark text-white">

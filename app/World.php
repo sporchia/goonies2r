@@ -20,16 +20,25 @@ class World
     protected $vertices = [];
     /** @var \App\Support\LocationCollection */
     protected $locations;
+    /** @var array */
+    protected $config = [];
 
     /**
      * Create a graph of the current world based on Items Collected.
      *
-     * @param \App\Support\ItemCollection $items items that player has collected
+     * @todo instead of building a new world in a set state, let's reuse a
+     * single world and enable/disable edges based on items. This will require
+     * some considerable refactoring.
+     *
+     * @param \App\Support\ItemCollection  $items  items that player has
+     * collected
+     * @param array  $config  config for this world
      *
      * @return void
      */
-    public function __construct(ItemCollection $items)
+    public function __construct(ItemCollection $items, array $config = [])
     {
+        $this->config = $config;
         $this->graph = new Graph;
         $start = new Vertex($this->graph, 'Start');
         $start->setAttribute('graphviz.fillcolor', 'green');
@@ -72,15 +81,15 @@ class World
             'Room 03' => new Room($this->graph, 'Slingshot',         0x03, 0x80, 0x0c, 0x0d),
             'Room 04' => new Room($this->graph, 'Need Glasses Lady', 0x04, 0x00, 0x04, 0x0d),
             'Room 05' => new Room($this->graph, 'Device 1',          0x05, 0x80, 0x0c, 0x0d),
-            'Room 06' => new Room($this->graph, 'Warp Zone 1',       0x06, 0x00, 0x0c, 0x0d),
+            'Room 06' => new Room($this->graph, 'Warp Zone',         0x06, 0x00, 0x0c, 0x0d),
             'Room 07' => new Room($this->graph, 'Bomb Box 1',        0x07, 0x40, 0x05, 0x0c),
             'Room 08' => new Room($this->graph, 'Connector',         0x08, 0x6a, 0x02, 0x0c),
             'Room 09' => new Room($this->graph, 'Goonie 1',          0x09, 0x00, 0x04, 0x0c),
             'Room 0a' => new Room($this->graph, 'Old Lady',          0x0a, 0x00, 0x04, 0x0e),
             'Room 0b' => new Room($this->graph, 'Connector',         0x0b, 0x00, 0x07, 0x0d),
             'Room 0c' => new Room($this->graph, 'Hint 2',            0x0c, 0x00, 0x01, 0x0d),
-            'Room 0d' => new Room($this->graph, 'Fire Box 1',        0x0d, 0x40, 0x02, 0x0d),
-            'Room 0e' => new Room($this->graph, 'Transicer Room',    0x0e, 0x40, 0x0d, 0x0e),
+            'Room 0d' => new Room($this->graph, 'Fire Box 2',        0x0d, 0x40, 0x02, 0x0d),
+            'Room 0e' => new Room($this->graph, 'Transceiver Room',  0x0e, 0x40, 0x0d, 0x0e),
             'Room 0f' => new Room($this->graph, 'Candle Lady',       0x0f, 0x00, 0x02, 0x0e),
             'Room 10' => new Room($this->graph, 'Connector',         0x10, 0x10, 0x0c, 0x0e),
             'Room 11' => new Room($this->graph, 'Connector',         0x11, 0x10, 0x0c, 0x0d),
@@ -99,11 +108,11 @@ class World
             'Room 1e' => new Room($this->graph, 'Connector',         0x1e, 0x10, 0x0d, 0x0e),
             'Room 1f' => new Room($this->graph, 'Konamiman',         0x1f, 0x00, 0x05, 0x0e),
             'Room 20' => new Room($this->graph, 'Device 2',          0x20, 0x90, 0x0a, 0x0e),
-            'Room 21' => new Room($this->graph, 'Keys 2',            0x21, 0x50, 0x06, 0x0e),
+            'Room 21' => new Room($this->graph, 'Keys 3',            0x21, 0x50, 0x06, 0x0e),
             'Room 22' => new Room($this->graph, 'Connector',         0x22, 0x0e, 0x06, 0x0e),
             'Room 23' => new Room($this->graph, 'Connector',         0x23, 0x00, 0x09, 0x0e),
             'Room 24' => new Room($this->graph, 'Warp Man',          0x24, 0x00, 0x0c, 0x0e),
-            'Room 25' => new Room($this->graph, 'Fire Box 2',        0x25, 0x40, 0x04, 0x0e),
+            'Room 25' => new Room($this->graph, 'Bomb Box 2',        0x25, 0x40, 0x04, 0x0e),
             'Room 26' => new Room($this->graph, 'Connector',         0x26, 0x6a, 0x04, 0x0e),
             'Room 27' => new Room($this->graph, 'Connector',         0x27, 0x00, 0x0c, 0x0e),
             'Room 28' => new Room($this->graph, 'Connector',         0x28, 0x00, 0x0c, 0x0e),
@@ -123,10 +132,10 @@ class World
             'Room 36' => new Room($this->graph, 'Goonie 4',          0x36, 0x00, 0x04, 0x0e),
             'Room 37' => new Room($this->graph, 'Connector',         0x37, 0x00, 0x05, 0x0e),
             'Room 38' => new Room($this->graph, 'Connector',         0x38, 0x6a, 0x03, 0x0e),
-            'Room 39' => new Room($this->graph, 'Keys 3',            0x39, 0x40, 0x04, 0x0e),
+            'Room 39' => new Room($this->graph, 'Keys 4',            0x39, 0x40, 0x04, 0x0e),
             'Room 3a' => new Room($this->graph, 'Raincoat',          0x3a, 0x68, 0x04, 0x0c),
             'Room 3b' => new Room($this->graph, 'Connector',         0x3b, 0x00, 0x0c, 0x0e),
-            'Room 3c' => new Room($this->graph, 'Fire Box 4',        0x3c, 0x40, 0x04, 0x0e),
+            'Room 3c' => new Room($this->graph, 'Fire Box 1',        0x3c, 0x40, 0x04, 0x0e),
             'Room 3d' => new Room($this->graph, 'Connector',         0x3d, 0x00, 0x0e, 0x0e),
             'Room 3e' => new Room($this->graph, 'Hint 8',            0x3e, 0x00, 0x06, 0x0e),
             'Room 3f' => new Room($this->graph, 'Connector',         0x3f, 0x00, 0x09, 0x0e),
@@ -136,44 +145,47 @@ class World
             'Room 43' => new Room($this->graph, 'Connector',         0x43, 0x00, 0x05, 0x0e),
             'Room 44' => new Room($this->graph, 'Hint 9',            0x44, 0x00, 0x06, 0x0e),
             'Room 45' => new Room($this->graph, 'Bomb Box 3',        0x45, 0x40, 0x0a, 0x0e),
-            'Room 46' => new Room($this->graph, 'Device 5',          0x46, 0x80, 0x01, 0x0f),
-            'Room 47' => new Room($this->graph, 'Keys 3',            0x47, 0x40, 0x02, 0x0f),
+            'Room 46' => new Room($this->graph, 'Device 4',          0x46, 0x80, 0x01, 0x0f),
+            'Room 47' => new Room($this->graph, 'Keys 2',            0x47, 0x40, 0x02, 0x0f),
             'Room 48' => new Room($this->graph, 'Hint 4',            0x48, 0x00, 0x00, 0x0f),
             'Room 49' => new Room($this->graph, 'Connector',         0x49, 0x00, 0x02, 0x0f),
             'Room 4a' => new Room($this->graph, 'Jumping Shoes',     0x4a, 0x00, 0x01, 0x0f),
             'Room 4b' => new Room($this->graph, 'Ladder',            0x4b, 0x40, 0x03, 0x0f),
-            'Room 4c' => new Room($this->graph, 'Bomb Box 2',        0x4c, 0x40, 0x01, 0x0f),
+            'Room 4c' => new Room($this->graph, 'Bomb Box 4',        0x4c, 0x40, 0x01, 0x0f),
             'Room 4d' => new Room($this->graph, 'Connector',         0x4d, 0x69, 0x82, 0x0f),
             'Room 4e' => new Room($this->graph, 'Goonie 3',          0x4e, 0x00, 0x40, 0x0f),
-            'Room 4f' => new Room($this->graph, 'Annie',             0x4f, 0x00, 0x00, 0x10),
-        //  'Room 50' => new Room($this->graph, 'Unused',            0x50, 0x00, 0x00, 0x0c),
+            // Annie is normally 0x10 for the 6th parameter, however this get's
+            // set by Room later now, so we can default this to the type of room
+            // we want when she isn't there.
+            'Room 4f' => new Room($this->graph, 'Annie',             0x4f, 0x00, 0x00, 0x0f),
+            //  'Room 50' => new Room($this->graph, 'Unused',            0x50, 0x00, 0x00, 0x0c),
             'Room 51' => new Room($this->graph, 'Connector',         0x51, 0x00, 0x0c, 0x0c),
             'Room 52' => new Room($this->graph, 'Connector',         0x52, 0x69, 0x84, 0x0c),
             'Room 53' => new Room($this->graph, 'Vest',              0x53, 0x0c, 0x40, 0x0c),
             'Room 54' => new Room($this->graph, 'Connector',         0x54, 0x10, 0x0c, 0x0d),
             'Room 55' => new Room($this->graph, 'Connector',         0x55, 0x6b, 0x44, 0x0d),
-            'Room 56' => new Room($this->graph, 'Fire Box 4',        0x56, 0x40, 0x80, 0x0d),
-            'Room 57' => new Room($this->graph, 'Device 4',          0x57, 0x80, 0x0c, 0x0d),
+            'Room 56' => new Room($this->graph, 'Fire Box 3',        0x56, 0x40, 0x80, 0x0d),
+            'Room 57' => new Room($this->graph, 'Device 5',          0x57, 0x80, 0x0c, 0x0d),
             'Room 58' => new Room($this->graph, 'Connector',         0x58, 0x0e, 0x04, 0x0d),
             'Room 59' => new Room($this->graph, 'Connector',         0x59, 0x00, 0x84, 0x0c),
             'Room 5a' => new Room($this->graph, 'Old Lady',          0x5a, 0x00, 0x40, 0x0c),
             'Room 5b' => new Room($this->graph, 'Connector',         0x5b, 0x0e, 0x04, 0x0c),
-            'Room 5c' => new Room($this->graph, 'Speed Shoes 2',     0x5c, 0x68, 0x04, 0x0c),
+            'Room 5c' => new Room($this->graph, 'Hyper Shoes 2',     0x5c, 0x68, 0x04, 0x0c),
             'Room 5d' => new Room($this->graph, 'Connector',         0x5d, 0x6b, 0x44, 0x0d),
             'Room 5e' => new Room($this->graph, 'Connector',         0x5e, 0x00, 0x81, 0x0d),
             'Room 5f' => new Room($this->graph, 'Warp Dude',         0x5f, 0x00, 0x02, 0x0d),
-        //  'Room 60' => new Room($this->graph, 'Unused',            0x60, 0x00, 0x0c, 0x0c),
-        //  'Room 61' => new Room($this->graph, 'Unused',            0x61, 0x10, 0x0f, 0x0c),
+            //  'Room 60' => new Room($this->graph, 'Unused',            0x60, 0x00, 0x0c, 0x0c),
+            //  'Room 61' => new Room($this->graph, 'Unused',            0x61, 0x10, 0x0f, 0x0c),
             'Room 62' => new Room($this->graph, 'Empty',             0x62, 0x00, 0x04, 0x0d),
             'Room 63' => new Room($this->graph, 'Connector',         0x63, 0x00, 0x01, 0x0f),
             'Room 64' => new Room($this->graph, 'Goonie 6',          0x64, 0x00, 0x02, 0x0f),
             'Room 65' => new Room($this->graph, 'Connector',         0x65, 0x0f, 0x46, 0x0c),
             'Room 66' => new Room($this->graph, 'Connector',         0x66, 0x10, 0x01, 0x0c),
-            'Room 67' => new Room($this->graph, 'Fire Box 3',        0x67, 0x80, 0x80, 0x0c),
+            'Room 67' => new Room($this->graph, 'Fire Box 4',        0x67, 0x80, 0x80, 0x0c),
             'Room 68' => new Room($this->graph, 'Warp Zone',         0x68, 0x00, 0x0d, 0x0e),
             'Room 69' => new Room($this->graph, 'Alien',             0x69, 0x00, 0x02, 0x0e),
             'Room 6a' => new Room($this->graph, 'Warp Zone',         0x6a, 0x00, 0x0c, 0x0c),
-            'Room 6b' => new Room($this->graph, 'Connector',         0x6b, 0x90, 0x41, 0x0c),
+            'Room 6b' => new Room($this->graph, 'Device 6',          0x6b, 0x90, 0x41, 0x0c),
             'Room 6c' => new Room($this->graph, 'Warp Zone',         0x6c, 0x00, 0x06, 0x0c),
             'Room 6d' => new Room($this->graph, 'Hint 10',           0x6d, 0x00, 0x04, 0x0c),
             'Room 6e' => new Room($this->graph, 'Connector',         0x6e, 0x7a, 0x04, 0x0c),
@@ -187,7 +199,7 @@ class World
             'Room 76' => new Room($this->graph, 'Goonie 5',          0x76, 0x00, 0x40, 0x0e),
             'Room 77' => new Room($this->graph, 'Warp Zone',         0x77, 0x00, 0x04, 0x0d),
             'Room 78' => new Room($this->graph, 'Konamiman',         0x78, 0x00, 0x04, 0x0e),
-            'Room 79' => new Room($this->graph, 'Sprint Shoes',      0x79, 0x80, 0x04, 0x0e),
+            'Room 79' => new Room($this->graph, 'Hyper Shoes',       0x79, 0x80, 0x04, 0x0e),
             'Room 7a' => new Room($this->graph, 'Frogman',           0x7a, 0x00, 0x00, 0x0f),
             'Room 7b' => new Room($this->graph, 'Konamiman',         0x7b, 0x00, 0x04, 0x0e),
             'Room 7c' => new Room($this->graph, 'Konamiman',         0x7c, 0x00, 0x04, 0x0e),
@@ -208,6 +220,7 @@ class World
             'Item 46' => new Location\Visible($this->graph, 'Item 46', $this->vertices['Room 46']),
             'Item 57' => new Location\Visible($this->graph, 'Item 57', $this->vertices['Room 57']),
             'Item 67' => new Location\Visible($this->graph, 'Item 67', $this->vertices['Room 67']),
+            'Item 6b' => new Location\Visible($this->graph, 'Item 6b', $this->vertices['Room 6b']),
             'Item 79' => new Location\Visible($this->graph, 'Item 79', $this->vertices['Room 79']),
             'Item 20' => new Location\Visible($this->graph, 'Item 20', $this->vertices['Room 20']),
 
@@ -352,7 +365,7 @@ class World
      *
      * @return \Fhaculty\Graph\Graph
      */
-    public function getGraph() : Graph
+    public function getGraph(): Graph
     {
         return $this->graph;
     }
@@ -366,7 +379,7 @@ class World
      *
      * @return \Fhaculty\Graph\Graph
      */
-    public function getReachableGraphFromVertex(Vertex $start) : Graph
+    public function getReachableGraphFromVertex(Vertex $start): Graph
     {
         $alg = new BreadthFirst($start);
 
@@ -383,7 +396,7 @@ class World
      *
      * @return \Fhaculty\Graph\Graph
      */
-    public function getRoomsGraphFromVertex(Vertex $start) : Graph
+    public function getRoomsGraphFromVertex(Vertex $start): Graph
     {
         $noRegions = $this->graph->getVertices()->getVerticesMatch(function ($vertex) {
             return !$vertex instanceof Region;
@@ -410,7 +423,7 @@ class World
      *
      * @return \App\Support\Collection
      */
-    public function getDoorsToRoom(Room $room) : Collection
+    public function getDoorsToRoom(Room $room): Collection
     {
         $currentItems = $this->getItems();
         $this->setItems(Item::all());
@@ -433,7 +446,7 @@ class World
      *
      * @return \App\Support\LocationCollection
      */
-    public function getLocations() : LocationCollection
+    public function getLocations(): LocationCollection
     {
         return $this->locations;
     }
@@ -443,7 +456,7 @@ class World
      *
      * @return \App\Support\Collection
      */
-    public function getRooms() : Collection
+    public function getRooms(): Collection
     {
         return new Collection(array_filter($this->vertices, function ($vertex) {
             return $vertex instanceof Room;
@@ -457,7 +470,7 @@ class World
      *
      * @return \App\Support\LocationCollection
      */
-    public function getReachableLocationsFrom(Vertex $start) : LocationCollection
+    public function getReachableLocationsFrom(Vertex $start): LocationCollection
     {
         $graph = $this->getReachableGraphFromVertex($start);
         $vertices = array_map(function ($vertex) {
@@ -474,7 +487,7 @@ class World
      *
      * @return \App\Support\LocationCollection
      */
-    public function getEmptyLocations() : LocationCollection
+    public function getEmptyLocations(): LocationCollection
     {
         return $this->locations->getEmptyLocations();
     }
@@ -486,7 +499,7 @@ class World
      *
      * @return \App\Support\ItemCollection
      */
-    public function collectItemsFrom(Vertex $start) : ItemCollection
+    public function collectItemsFrom(Vertex $start): ItemCollection
     {
         $graph = $this->getReachableGraphFromVertex($start);
 
@@ -502,7 +515,7 @@ class World
      *
      * @return \App\Support\ItemCollection
      */
-    public function getItems() : ItemCollection
+    public function getItems(): ItemCollection
     {
         $locations = new LocationCollection($this->graph->getVertices()->getVerticesMatch(function ($vertex) {
             return $vertex instanceof Location;
@@ -520,7 +533,7 @@ class World
      *
      * @return \Fhaculty\Graph\Vertex
      */
-    public function getVertex(string $name) : Vertex
+    public function getVertex(string $name): Vertex
     {
         if (!isset($this->vertices[$name])) {
             throw new \OutOfBoundsException;
@@ -538,7 +551,7 @@ class World
      *
      * @return \App\Location
      */
-    public function getLocation(string $name) : Location
+    public function getLocation(string $name): Location
     {
         if (!isset($this->locations[$name])) {
             throw new \OutOfBoundsException;
@@ -548,16 +561,36 @@ class World
     }
 
     /**
+     * Get Room by name.
+     *
+     * @param string $name name of location
+     *
+     * @throws \OutOfBoundsException if the Location doesn't exist
+     *
+     * @return \App\Room
+     */
+    public function getRoom(string $name): Room
+    {
+        if (!isset($this->vertices[$name]) || !$this->vertices[$name] instanceof Room) {
+            throw new \OutOfBoundsException;
+        }
+
+        return $this->vertices[$name];
+    }
+
+    /**
      * Get all rooms that can have a Goonie.
      *
      * @return \App\Support\Collection
      */
-    public function getPotentialGoonieRooms() : Collection
+    public function getPotentialGoonieRooms(): Collection
     {
+        // rooms that are not cages or have items
         $itemRooms = array_map(function ($location) {
             return $location->getRoom();
         }, $this->locations->filter(function ($location) {
-            return !$location instanceof Location\Cage;
+            return !$location instanceof Location\Cage
+                || $location->hasItem();
         })->all());
 
         return new Collection($this->graph->getVertices()->getVerticesMatch(function ($vertex) use ($itemRooms) {
@@ -574,7 +607,7 @@ class World
      *
      * @return void
      */
-    public function setItems(ItemCollection $items) : void
+    public function setItems(ItemCollection $items): void
     {
         $edges = $this->graph->getEdges();
         foreach ($edges as $edge) {
@@ -586,11 +619,28 @@ class World
     }
 
     /**
+     * Get config value based on the currently set rules.
+     *
+     * @param string  $key  dot notation key of config
+     * @param mixed|null  $default  value to return if $key is not found
+     *
+     * @return mixed
+     */
+    public function config(string $key, $default = null)
+    {
+        if (!array_key_exists($key, $this->config)) {
+            $this->config[$key] = config($key, null);
+        }
+
+        return $this->config[$key] ?? $default;
+    }
+
+    /**
      * These edges should always be set.
      *
      * @return void
      */
-    protected function defaultEdges() : void
+    protected function defaultEdges(): void
     {
         $this->vertices['Start']->createEdge($this->vertices['Front - Orange House Left']);
         $this->vertices['Front - Orange House Left']->createEdge($this->vertices['Front - Gray Basement Left']);
@@ -751,6 +801,7 @@ class World
         $this->vertices['Item 4a']->createEdgeToRoom();
         $this->vertices['Item 57']->createEdgeToRoom();
         $this->vertices['Item 67']->createEdgeToRoom();
+        $this->vertices['Item 6b']->createEdgeToRoom();
         $this->vertices['Item 79']->createEdgeToRoom();
         $this->vertices['Item 20']->createEdgeToRoom();
         $this->vertices['Item 21']->createEdgeToRoom();
@@ -852,7 +903,7 @@ class World
      *
      * @return void
      */
-    protected function setEdges(ItemCollection $items) : void
+    protected function setEdges(ItemCollection $items): void
     {
         if ($items->hasKeys()) {
             $this->vertices['Hint 1']->createEdgeToRoom();
