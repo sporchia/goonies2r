@@ -3,18 +3,17 @@ preset: laravel
 risky: false
 
 enabled:
-- phpdoc_order
-- phpdoc_separation
-- standardize_increment
-- ternary_to_null_coalescing
-- concat_with_spaces
-- pre_increment
-- alpha_ordered_imports
+  - phpdoc_order
+  - phpdoc_separation
+  - standardize_increment
+  - ternary_to_null_coalescing
+  - concat_with_spaces
+  - pre_increment
+  - alpha_ordered_imports
 
 disabled:
-- not_operator_with_successor_space
-- concat_without_spaces
-- post_increment
-- trim_array_spaces
-- method_argument_space
-- length_ordered_imports
+  - not_operator_with_successor_space
+  - concat_without_spaces
+  - post_increment
+  - trim_array_spaces
+  - method_argument_space
