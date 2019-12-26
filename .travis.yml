@@ -7,7 +7,6 @@ cache:
     - node_modules
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
   - composer install --no-interaction
   - touch database/database.sqlite
   - npm install
@@ -17,7 +16,7 @@ script:
   - composer test
   - php artisan code:analyse
   - npm test
-  - npm run coverage
+  - npm run coveralls
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
