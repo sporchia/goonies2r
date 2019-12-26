@@ -53,7 +53,7 @@ class RandomizerServiceTest extends TestCase
     public function testAnnieShuffle(): void
     {
         $randomizer = new RandomizerService;
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 20; ++$i) {
             $world = new World(new ItemCollection, [
                 'shuffleAnnie' => true,
             ]);

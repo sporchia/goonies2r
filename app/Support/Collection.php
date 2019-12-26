@@ -19,7 +19,7 @@ class Collection extends BaseCollection
 
         for ($i = $count - 1; $i >= 0; --$i) {
             $r = random_int(0, $i);
-            list($new_array[$i], $new_array[$r]) = [$new_array[$r], $new_array[$i]];
+            [$new_array[$i], $new_array[$r]] = [$new_array[$r], $new_array[$i]];
         }
 
         return new static($new_array);
